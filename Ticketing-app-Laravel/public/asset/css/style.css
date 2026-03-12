@@ -1,0 +1,1043 @@
+/* ==================== Variables & Reset ==================== */
+:root {
+    /* Palette de couleurs naturelles */
+    --bg-primary: #f5f5f0;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e8e6e1;
+    
+    --text-primary: #2c2c2c;
+    --text-secondary: #5a5a5a;
+    --text-light: #7a7a7a;
+    
+    --accent-primary: #6b8e7f;
+    --accent-secondary: #9db4a8;
+    --accent-hover: #557366;
+    
+    --border-light: #d4d2cd;
+    --border-medium: #b8b6b1;
+    
+    --danger: #c85a54;
+    --danger-hover: #a64842;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+    
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-primary);
+}
+
+a:active {
+    color: var(--accent-hover);
+}
+
+/* ==================== Header ==================== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-light);
+    padding: 8px 32px;
+    box-shadow: var(--shadow-sm);
+    top: 0;
+    z-index: 100;
+}
+
+
+.logo a img {
+    height: 55px;
+    width: 55px;
+    border-radius: 100px;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.logo a img:hover {
+    transform: scale(1.05);
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+nav a {
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+nav a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--accent-primary);
+}
+
+.Profile-drop {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 35px;
+}
+
+.Drop-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 5px 10px;
+
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    font-weight: bold;
+    font-size: 20px;
+    
+}
+
+.Drop-content {
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 5px;
+}
+
+
+
+.Drop-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    z-index: 100;
+}
+
+.Drop-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Optionnel : bouton en gras au survol */
+.Profile-drop:hover .Drop-button {
+    font-weight: bold;
+}
+/* ==================== Connexion Page ==================== */
+h2 {
+    text-align: center;
+    color: var(--accent-primary);
+    font-size: 35.2px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+.connexion-form {
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.Submit-button {
+    margin-top: 24px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.Submit-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.Submit-button:active {
+    transform: translateY(0);
+}
+
+
+
+/* ==================== Dashboard ==================== */
+.Dashboard-Stats {
+    list-style-type: none;
+    margin: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.stats-list-clients {
+    display: flex;
+    flex-direction: row;      
+    gap: 24px;
+    justify-content: center;    
+    align-items: stretch;       
+}
+
+.stats-list-clients > * {
+    flex: 1;
+    min-width: 200px;
+}
+
+.stats-list-tickets {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.stats-list-tickets1,
+.stats-list-tickets2 {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;              
+    min-width: 300px;  
+    justify-content: center;
+}
+
+.filter{
+    display: flex;
+    flex-direction: row;
+    
+}
+.filter-btn-En-Cours,
+.filter-btn-Non-Traite,
+.filter-btn-Money{
+    background-color: lightcyan;
+    margin: 10px;
+
+    margin-bottom: 24px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    align-self: flex-start;
+}
+
+.filter-btn:hover,
+.filter-btn-En-Cours:hover,
+.filter-btn-Non-Traite:hover,
+.filter-btn-Money:hover{
+    background-color: var(--accent-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.cadre {
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 32px;
+    min-height: 120px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    font-size: 20.8px;
+}
+
+.cadre:hover {
+    border-color: var(--accent-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+/* ==================== Fast Access ==================== */
+.fast-Access {
+    list-style-type: none;
+    margin: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.access-list {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.projects-fast-access,
+.tickets-fast-access,
+.clients-fast-access {
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    min-width: 300px;
+    padding: 20px 24px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    font-size: 17.6px;
+
+    width: 100%;
+}
+
+.projects-fast-access:hover,
+.tickets-fast-access:hover {
+    border-color: var(--accent-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+}
+
+.projects-fast-access p,
+.tickets-fast-access p {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+.tickets-fast-access ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==================== Tickets/Projects Lists ==================== */
+.Tickets-List,
+.Projects-List {
+    padding: 32px 48px;
+    list-style-type: none;
+    margin: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.new-ticket-button {
+    margin-bottom: 24px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    align-self: flex-start;
+}
+
+.new-ticket-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* ==================== Ticket/Project Page ==================== */
+.Ticket-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.Right-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.back-button {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.back-button:hover {
+    background-color: var(--border-medium);
+    border-color: var(--text-secondary);
+}
+
+.Edit-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--accent-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.Edit-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.Edit-button:active {
+    transform: translateY(0);
+}
+
+.Edit-button:focus {
+    outline: 3px solid var(--accent-secondary);
+    outline-offset: 2px;
+}
+
+.Supression-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--danger);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.Supression-button:hover {
+    background-color: var(--danger-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.Supression-button:active {
+    transform: translateY(0);
+}
+
+.Supression-button:focus {
+    outline: 3px solid rgba(200, 90, 84, 0.3);
+    outline-offset: 2px;
+}
+
+.Ticket-cadre {
+    font-size: 17.6px;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+}
+
+.Ticket-cadre p {
+    margin-left: 40px;
+}
+
+/* ==================== Tables ==================== */
+.Table-ticket {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.Table-ticket th {
+    text-align: left;
+    padding: 16px;
+    border-bottom: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 17.6px;
+}
+
+.Table-ticket th:nth-child(1) {
+    text-align: center;
+}
+
+.Table-ticket td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.Table-ticket td:nth-child(1) {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.Table-ticket td:nth-child(2) {
+    text-align: right;
+    color: var(--text-primary);
+}
+
+.Table-ticket tr:hover {
+    background-color: var(--bg-tertiary);
+}
+/* ==================== Forms-New-Tickets/Project ==================== */
+
+
+.Forms-Cadre {
+    background-color: var(--bg-secondary);
+    padding: 32px;
+    margin: 32px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+}
+
+.error-text{
+    background-color: var(--bg-secondary);
+    padding: 10px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* =================== Profile =================== */
+
+.Profile{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+
+    
+
+}
+
+.Profil-Picture{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 800px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 30px;
+
+    padding: 20px;
+
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    
+}
+
+#Profil-image{
+    height: 250px;
+    width: 250px;
+
+    
+    
+    margin: 30px;
+    border-radius: 200px;
+    object-fit: cover;
+    background-size: cover;
+}
+
+#Profil-Informations p{
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    padding: 10px;
+
+    margin-bottom: 20px;
+}
+
+#Profile-Access{
+    display: inline-block;
+    width: 100%;
+}
+
+/* =================== Settings =================== */
+
+.SettingsPage{
+    display: flex;
+    justify-content: center;
+}
+
+.ClassicSettings, .DashBoardSettings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+
+
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-light);
+    padding: 8px 32px;
+    box-shadow: var(--shadow-sm);
+
+    margin: 20px;
+}
+
+.Theme, .LangueSettings{
+     display: flex;
+    gap: 50px;
+    font-weight: 500;
+    padding: 8px 16px;
+    
+}
+
+.ThemeSwitch, .FastAccessSwitch{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ThemeSwitch input, .FastAccessSwitch input {
+    display: none;
+}
+
+/* Le fond du switch */
+.ThemeSwitch .slider, .FastAccessSwitch .slider {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background-color: var(--border-medium);
+    border-radius: 50px;
+    transition: var(--transition);
+}
+
+/* Le rond */
+.ThemeSwitch .slider::before, .FastAccessSwitch .slider::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    top: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Activé */
+.ThemeSwitch input:checked + .slider, .FastAccessSwitch input:checked + .slider {
+    background-color: var(--accent-primary);
+}
+
+.ThemeSwitch input:checked + .slider::before, .FastAccessSwitch input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+.switch-label {
+    font-weight: 500;
+}
+
+
+    
+
+
+
+/* ==================== Forms ==================== */
+
+
+form {
+    background-color: var(--bg-secondary);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+form input[type="text"],
+form textarea,
+form select,
+form input[type="password"],
+form input[type="email"],
+form input[type="file"] {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    margin-bottom: 10px;
+}
+
+form input[type="text"]:focus,
+form textarea:focus,
+form select:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form input[type="file"]:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 0 3px rgba(107, 142, 127, 0.1);
+}
+
+form input[type="text"]:hover,
+form textarea:hover,
+form select:hover,
+form input[type="password"]:hover,
+form input[type="email"]:hover,
+form input[type="file"]:hover  {
+    border-color: var(--accent-secondary);
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+form select {
+    cursor: pointer;
+    appearance: none;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+form br {
+    display: none;
+}
+
+form .Submit-button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.ValidForms{
+    
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: green;
+    color: white;
+    height: 100px;
+    width: 300px;
+    border-radius: 80px;
+
+    font-size: 25px;
+
+}
+
+.titanic{
+    display: none;
+}
+
+/* ==================== Select ==================== */
+
+select {
+    appearance: none;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 12px 44px 12px 16px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    align-items: center;
+}
+
+
+
+
+/* ==================== Bouttons génériques ==================== */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+    
+    .stats-list-clients {
+    flex-direction: column;
+    }   
+
+    .access-list {
+        flex-direction: column;
+    }
+
+    .stats-list-tickets{
+        flex-direction: column;
+    }
+    
+    .stats-list-tickets1,
+    .stats-list-tickets2 {
+        flex-direction: column;
+    }
+    
+    .Ticket-Header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    
+    .Right-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .back-button,
+    .Edit-button,
+    .Supression-button {
+        width: 100%;
+    }
+    .Profile{
+        flex-direction: column;
+    }
+
+    .SettingsPage {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ClassicSettings,
+    .DashBoardSettings {
+        width: 100%;
+        max-width: 500px;
+        margin: 12px;
+        padding: 16px 20px;
+    }
+
+    .Theme,
+    .LangueSettings {
+        width: 100%;
+        justify-content: space-between;
+        gap: 20px;
+    }
+}
+
+
+
+/* ==================== Responsive mobile renforcé ==================== */
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+
+    body {
+        font-size: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    header {
+        padding: 12px;
+    }
+
+    .logo a img {
+        height: 45px;
+        width: 45px;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .Dashboard-Stats,
+    .fast-Access,
+    .Tickets-List,
+    .Projects-List,
+    .Forms-Cadre {
+        margin: 16px;
+        padding: 16px;
+    }
+
+    .cadre {
+        padding: 20px;
+        font-size: 18px;
+    }
+
+    .projects-fast-access,
+    .tickets-fast-access,
+    .clients-fast-access {
+        min-width: unset;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .tickets-fast-access ul {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .Table-ticket {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .Ticket-cadre p {
+        margin-left: 0;
+    }
+
+    .Profile {
+        gap: 20px;
+    }
+
+    .Profil-Picture {
+        margin: 20px;
+        width: calc(100% - 40px);
+        height: auto;
+    }
+
+    #Profil-image {
+        width: 180px;
+        height: 180px;
+    }
+
+    form {
+        padding: 24px;
+        margin: 16px;
+    }
+
+    .ValidForms {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+        font-size: 20px;
+        height: 80px;
+    }
+
+    @media (max-width: 480px) {
+
+    .SettingsPage {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ClassicSettings,
+    .DashBoardSettings {
+        width: 100%;
+        margin: 10px 0;
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .Theme,
+    .LangueSettings {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+    }
+
+    .Theme h3,
+    .LangueSettings h3 {
+        font-size: 16px;
+    }
+
+    .ThemeSwitch,
+    .FastAccessSwitch {
+        gap: 8px;
+    }
+}
+
+}
