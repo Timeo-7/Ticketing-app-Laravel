@@ -14,9 +14,14 @@ class TicketController extends Controller
         ]);
     }
 
-    public function Ticket()
+    public function Ticket($id)
     {
-        return view('tickets.Ticket');
+        $ticket = Ticket::find($id);
+        dd($ticket);
+
+        return view('tickets.Ticket', [
+            "ticket" => $ticket,
+        ]);
     }
 
     public function TicketForm()

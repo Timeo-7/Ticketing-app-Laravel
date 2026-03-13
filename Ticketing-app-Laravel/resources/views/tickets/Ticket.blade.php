@@ -22,9 +22,9 @@
         
 
         <div class="Ticket-cadre">   
-            <h3>Client:</h3><p> Client Name</p>
-            <h3>Project:</h3><p> Project Name</p>
-            <h3>Description:</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h3>Client:</h3><p> {{$ticket->client}}</p>
+            <h3>Project:</h3><p> {{$ticket->project}}</p>
+            <h3>Description:</h3><p> {{$ticket->description}}</p>
             <ul>
                 
             </ul>
@@ -33,28 +33,20 @@
                     <th colspan="2">Ticket Statue</th>
                 </tr>
                 <tr>
-                    <td>Nombre de personnes concernées: </td>
-                    <td>2x🚹</td>
-                </tr>
-                <tr>
                     <td>Statut:</td> 
-                    <td>⏳ En cours</td>
-                </tr>
-                <tr>
-                    <td>Priorité: </td>
-                    <td>Haute</td>
+                    <td>{{$ticket->statut}}</td>
                 </tr>
                 <tr>
                     <td>Date de création:</td>
-                    <td>28/01/2026 12:06</td>
+                    <td>{{$ticket->created_at}}</td>
                 </tr>
                 <tr>
                     <td>Date de dernière mise à jour: </td>
-                    <td>01/02/2026 10:00</td>
+                    <td>{{$ticket->updated_at}}</td>
                 </tr>
                 <tr>
                     <td>Facturable:</td>
-                    <td>🪙 Oui</td>
+                    <td>{{$ticket->facturable}}</td>
                 </tr>
             </table>
 

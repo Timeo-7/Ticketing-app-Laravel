@@ -22,12 +22,12 @@ Route::get('/Inscription', [ConnexionController::class, 'Inscription'])->name('c
 
 
 
-    Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])->name('dashboard.Dashboard');
+    Route::get('/Dashboard/{id}', [DashboardController::class, 'Dashboard'])->name('dashboard.Dashboard');
     Route::get('/Client-List', [ClientController::class, 'ClientList'])->name('clients.ClientList');
 
 
     Route::get('/Ticket-List', [TicketController::class, 'TicketList'])->name('tickets.TicketList');
-    Route::get('/Ticket', [TicketController::class, 'Ticket'])->name('tickets.Ticket');
+    Route::get('/Ticket/{id}', [TicketController::class, 'Ticket'])->name('tickets.Ticket');
     Route::get('/Ticket-Form', [TicketController::class, 'TicketForm'])->name('tickets.TicketForm');
 
     Route::get('/Project-List', [ProjectController::class, 'ProjectList'])->name('projects.ProjectList');

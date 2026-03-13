@@ -10,7 +10,7 @@
                 <div class="stats-list-clients">
                     <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: 36</a>
                     <a class="cadre" href="{{ route('projects.ProjectList') }}">Projects: 45</a>
-                    <a class="cadre" href="{{ route('tickets.TicketList') }}">Tickets: 125</a>
+                    <a class="cadre" href="{{ route('tickets.TicketList', $id) }}">Tickets: 125</a>
                 </div>
 
                 <div class="stats-list-tickets">
@@ -36,43 +36,43 @@
             <div class="access-list">
                 <div class="cadre">   
                     <a href="{{ route('projects.ProjectList') }}">Projects</a>
+                     @foreach ($projects as $project)
 
-                    <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                         <p>Project 1</p>
-                         <p>25x🧾</p>
-                    </a>
-                    <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                         <p>Project 2</p>
-                         <p>36x🧾</p>
-                    </a>
+                        <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
+                            <p>{{$project->title}}</p>
+                            <p>{{$project->workingTickets}}x🧾</p>
+                        </a>
+
+                    @endforeach
 
                 </div>
                 
                 <div class="cadre">   
-                    <a href="{{ route('tickets.TicketList') }}">Tickets</a>
+                    <a href="{{ route('tickets.TicketList',$id) }}">Tickets</a>
 
-                    <a class="tickets-fast-access" href="{{ route('tickets.Ticket') }}" >
-                        <p>Tickets 1</p>
-                        <p>client 1</p>
-                        
-                        <ul>
-                            <li>2x🚹</li>
-                            <li>⏳</li>
-                            <li>🪙</li>
-                            <li>28/01/2026 12:06</li>
-                        </ul>
-                    </a>
+                    <table class="Table-ticket" id="content">
+                    <thead>
+                        <tr>
+                            <td>Ticket</td>
+                            <td>Client</td>
+                            <td>Statut</td>
+                            <td>Paiement</td>
+                            <td>Date</td>
+                        </tr>
+                    </thead>
 
-                    <a class="tickets-fast-access" href="{{ route('tickets.Ticket') }}" >
-                        <p>Tickets 2</p>
-                        <p>client 2</p>
-                        
-                        <ul>
-                            <li>0x🚹</li>
-                            <li>❌</li>
-                            <li>27/01/2026 14:29</li>
-                        </ul>
-                    </a>
+                    <tbody>
+                        @foreach($tickets as $ticket)
+                        <tr onclick="location.href='{{ route('tickets.Ticket', $ticket->id) }}'" style="cursor:pointer;">
+                            <td>{{ $ticket->title }}</td>
+                            <td>{{ $ticket->client }}</td>
+                            <td>{{ $ticket->statut }}</td>
+                            <td>{{ $ticket->facturable }}</td>
+                            <td>{{ $ticket->created_at }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
                 </div>
                 

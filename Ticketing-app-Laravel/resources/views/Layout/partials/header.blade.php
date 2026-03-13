@@ -1,12 +1,12 @@
 <header>
         <div class="logo">
-            <a href="{{ route('dashboard.Dashboard') }}">
+            <a href="{{ route('dashboard.Dashboard', 1) }}">
                 <img src="{{asset('asset/img/Logo.png')}}" alt="Logo de moi hyper bg">
             </a>
         </div>
         <h2>Welcome</h2>
         <nav>
-            <a href="{{ route('dashboard.Dashboard') }}">Dashboard</a>
+            <a href="{{ route('dashboard.Dashboard',1) }}">Dashboard</a>
             <a href="{{ route('projects.ProjectList') }}">Projects</a>
             <a href="{{ route('tickets.TicketList') }}">Tickets</a>
             
