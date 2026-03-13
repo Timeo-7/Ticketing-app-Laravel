@@ -10,6 +10,17 @@ class ConnexionController extends Controller
     {
         return view('connexion.Connexion');
     }
+
+     public function Store(Request $request)
+    {
+        dd($resquest);
+        $validated = $request->validate([
+            'email' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
+        ]);
+
+        return redirect()->route('dashboard.Dashboard');
+    }
     
     public function Forgotten()
     {

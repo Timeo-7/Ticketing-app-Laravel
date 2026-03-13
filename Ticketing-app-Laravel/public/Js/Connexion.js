@@ -28,14 +28,14 @@ function chek_connexion_success() {
          PASSWORD_ERROR.classList.remove("titanic");
         res ++;
     }
-    else if(PASSWORD_INPUT.value.length < 8){
+   /*  else if(PASSWORD_INPUT.value.length < 8){
         PASSWORD_ERROR.classList.remove("titanic");
         res ++;
     }
     else if(!/\d/.test(PASSWORD_INPUT.value) || !/[a-zA-Z]/.test(PASSWORD_INPUT.value)){
         PASSWORD_ERROR.classList.remove("titanic");
         res ++;
-    }
+    } */
     else{
         PASSWORD_ERROR.classList.add("titanic");
     }

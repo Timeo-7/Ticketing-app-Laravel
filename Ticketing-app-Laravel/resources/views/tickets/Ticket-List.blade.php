@@ -32,24 +32,17 @@
                 </thead>
 
                 <tbody>
+                    @foreach($tickets as $ticket)
                     <tr onclick="location.href='{{ route('tickets.Ticket') }}'" style="cursor:pointer;">
-                        <td>Ticket 1</td>
+                        <td>{{ $ticket->title }}</td>
                         <td>Client 1</td>
                         <td>2x 🚹</td>
                         <td class="Statut">⏳</td>
                         <td class="Money">🪙</td>
                         <td>28/01/2026 12:06</td>
                     </tr>
-
-                   <tr onclick="location.href='{{ route('tickets.Ticket') }}'" style="cursor:pointer;">
-                        <td>Ticket 2</td>
-                        <td>Client 2</td>
-                        <td>0x 🚹</td>
-                        <td class="Statut">❌</td>
-                        <td class="Money">—</td>
-                        <td>27/01/2026 14:29</td>
-                    </tr>
                 </tbody>
+                @endforeach
             </table>
 
         </div>

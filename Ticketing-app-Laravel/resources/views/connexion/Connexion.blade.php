@@ -3,7 +3,8 @@
 @section('content')
 
  <section class="connexion-form">
-        <form id="submitform_connexion" action="{{ route('dashboard.Dashboard') }}" method="GET" novalidate>
+        <form id="submitform_connexion" action="{{ route('connexion.Store') }}" method="POST" novalidate>
+            @csrf
             <h2>Connexion</h2>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email">
