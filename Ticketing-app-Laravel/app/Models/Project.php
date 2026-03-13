@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Project extends Model
 {
-    protected $table = "ticket";
+    protected $table = "projects";
     protected $fillable = [
         "title",
         "client",
         "description",
-        "project",
-        "statut",
-        "facturable",
-        "project_id",
+        "ticketNumber",
+        "workingTickets",
+        "waitingTickets",
+        "contract",
         "user_id",
     ];
-
 }

@@ -10,7 +10,7 @@ class TicketSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    /* public function run(): void
+    public function run(): void
     {
         $tickets = [
             [
@@ -20,8 +20,8 @@ class TicketSeeder extends Seeder
                 'client' => 'Client A',
                 'description' => 'L’utilisateur ne peut pas se connecter au portail.',
                 'project' => 'Projet Alpha',
-                'statut' => 'ouvert',
-                'facturable' => 'oui',
+                'statut' => '⏳',
+                'facturable' => '🪙',
             ],
             [
                 'user_id' => 2,
@@ -30,8 +30,8 @@ class TicketSeeder extends Seeder
                 'client' => 'Client B',
                 'description' => 'Le paiement échoue avec un code 500.',
                 'project' => 'Projet Beta',
-                'statut' => 'en cours',
-                'facturable' => 'non',
+                'statut' => '❌',
+                'facturable' => '_',
             ],
             [
                 'user_id' => 3,
@@ -40,8 +40,8 @@ class TicketSeeder extends Seeder
                 'client' => 'Client C',
                 'description' => 'Le client demande un remboursement partiel.',
                 'project' => 'Projet Gamma',
-                'statut' => 'clos',
-                'facturable' => 'oui',
+                'statut' => '⏳',
+                'facturable' => '🪙',
             ],
             [
                 'user_id' => 4,
@@ -50,8 +50,8 @@ class TicketSeeder extends Seeder
                 'client' => 'Client D',
                 'description' => 'Les graphiques ne s’affichent pas correctement.',
                 'project' => 'Projet Alpha',
-                'statut' => 'ouvert',
-                'facturable' => 'non',
+                'statut' => '⏳',
+                'facturable' => '_',
             ],
             [
                 'user_id' => 5,
@@ -60,13 +60,14 @@ class TicketSeeder extends Seeder
                 'client' => 'Client E',
                 'description' => 'L’utilisateur ne reçoit pas l’email de réinitialisation.',
                 'project' => 'Projet Beta',
-                'statut' => 'en cours',
-                'facturable' => 'oui',
+                'statut' => '✅',
+                
+                'facturable' => '🪙',
             ],
         ];
 
         foreach ($tickets as $ticket) {
             Ticket::create($ticket);
         }
-    } */
+    }
 }

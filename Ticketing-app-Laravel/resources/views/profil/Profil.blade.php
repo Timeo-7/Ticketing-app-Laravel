@@ -7,7 +7,7 @@
             <img id="Profil-image" src="{{ asset('asset/img/Profile.png') }}" alt="Logo de moi hyper bg" >
             <div><h2 id="Profil Name">Maxence Gautier-Grall</h2></div>
             <div id="Profil-Informations">
-                <p>Email : {{$User->email}}</p>
+                <p>Email : XXXXXXX@XXXXXXX</p>
                 <p>Number : +33 (0)7 95 86 42 48</p>
                 <p>Account type : Client</p>
             </div>

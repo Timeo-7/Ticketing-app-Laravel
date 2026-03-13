@@ -4,12 +4,11 @@
                 <img src="{{asset('asset/img/Logo.png')}}" alt="Logo de moi hyper bg">
             </a>
         </div>
-        <h2>Welcome Maxence Gautier-Grall</h2>
+        <h2>Welcome</h2>
         <nav>
             <a href="{{ route('dashboard.Dashboard') }}">Dashboard</a>
             <a href="{{ route('projects.ProjectList') }}">Projects</a>
             <a href="{{ route('tickets.TicketList') }}">Tickets</a>
-            <a href="{{ route('clients.ClientList') }}">Clients</a>
             
             <div class="Profile-drop">
                 <button class="Drop-button">☰</button>

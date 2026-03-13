@@ -22,12 +22,11 @@
             <table class="Table-ticket" id="content">
                 <thead>
                     <tr>
-                        <th>Ticket</th>
-                        <th>Client</th>
-                        <th>Utilisateurs</th>
-                        <th>Statut</th>
-                        <th>Paiement</th>
-                        <th>Date</th>
+                        <td>Ticket</td>
+                        <td>Client</td>
+                        <td>Statut</td>
+                        <td>Paiement</td>
+                        <td>Date</td>
                     </tr>
                 </thead>
 
@@ -35,11 +34,10 @@
                     @foreach($tickets as $ticket)
                     <tr onclick="location.href='{{ route('tickets.Ticket') }}'" style="cursor:pointer;">
                         <td>{{ $ticket->title }}</td>
-                        <td>Client 1</td>
-                        <td>2x 🚹</td>
-                        <td class="Statut">⏳</td>
-                        <td class="Money">🪙</td>
-                        <td>28/01/2026 12:06</td>
+                        <td>{{ $ticket->client }}</td>
+                        <td>{{ $ticket->statut }}</td>
+                        <td>{{ $ticket->facturable }}</td>
+                        <td>{{ $ticket->created_at }}</td>
                     </tr>
                 </tbody>
                 @endforeach

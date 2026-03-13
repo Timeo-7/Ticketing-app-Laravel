@@ -11,15 +11,15 @@
         <div class="access-list">
                 <div class="cadre">   
                     <p>Projects</p>
+                    @foreach ($projects as $project)
 
                     <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                         <p>Project 1</p>
-                         <p>25x🧾</p>
+                         <p>{{$project->title}}</p>
+                         <p>{{$project->workingTickets}}x🧾</p>
                     </a>
-                    <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                         <p>Project 2</p>
-                         <p>36x🧾</p>
-                    </a>
+                    
+
+                    @endforeach
 
                 </div>
     </section>
