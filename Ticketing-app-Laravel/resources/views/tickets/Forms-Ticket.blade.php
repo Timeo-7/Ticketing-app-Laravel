@@ -26,11 +26,13 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"></textarea>
                 <br>
-                <label for="projet">Project:</label>
-                <select type="text" id="projet" name="projet">
-                    <option value="project1">No Project</option>
-                    <option value="project1">Project 1</option>
-                    <option value="project2">Project 2</option>
+                <label for="project">Project:</label>
+                <select type="text" id="projet" name="project">
+                    <option value="No-Project">No Project</option>
+                    @foreach ($projects as $project)
+                        <option value="{{$project->title}}">{{$project->title}}</option>
+                    @endforeach
+                    
                 </select>
                 <label for="facturable"> Facturable : <input type="checkbox" id="accept" name="facturable" value="1"> </label>
                     

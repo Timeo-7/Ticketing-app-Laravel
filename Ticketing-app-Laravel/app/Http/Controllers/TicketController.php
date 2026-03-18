@@ -43,9 +43,11 @@ class TicketController extends Controller
 
     public function TicketForm($id)
     {
+        $projects = Project::where("user_id", $id)->get();
         return view('tickets.Forms-Ticket', [
-            "id" => $id
-            ]);
+            "id" => $id,
+            "projects" => $projects,
+        ]);
     }
 
     public function Store(Request $request, $id)
@@ -62,7 +64,12 @@ class TicketController extends Controller
             return redirect()->route('tickets.Ticket-List');
         }
 
-        $project_id = Project::where('user_id',$id)->get();
+        if ($validated['project'] !== 'No-Project') {
+            $project = Project::where('title', $validated['project'])->first();
+            $project_id = $project ? $project->id : null;
+        } else {
+            $project_id = null;
+        }
 
         Ticket::create([
             'user_id' => $id,

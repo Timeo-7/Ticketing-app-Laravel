@@ -8,19 +8,19 @@
             <div class="stats-list">
 
                 <div class="stats-list-clients">
-                    <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: 36</a>
-                    <a class="cadre" href="{{ route('projects.ProjectList', $id) }}">Projects: 45</a>
-                    <a class="cadre" href="{{ route('tickets.TicketList', $id) }}">Tickets: 125</a>
+                    <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: ??</a>
+                    <a class="cadre" href="{{ route('projects.ProjectList', $id) }}">Projects: {{$projects->count()}}</a>
+                    <a class="cadre" href="{{ route('tickets.TicketList', $id) }}">Tickets: {{$tickets->count()}}</a>
                 </div>
 
                 <div class="stats-list-tickets">
                     <div class="stats-list-tickets1">
-                        <div class="cadre">🧾Tickets ouverts: 36</div>
-                        <div class="cadre">⏳Tickets en cours: 45</div>
+                        <div class="cadre">🧾Tickets ouverts: {{$tickets->count()}}</div>
+                        <div class="cadre">⏳Tickets en cours: {{$tickets->where("statut","⌛")->count()}}</div>
                     </div>
                     <div class="stats-list-tickets2">
-                        <div class="cadre">✅Tickets terminés: 125</div>
-                        <div class="cadre">💰Tickets facturables en attente: 125</div>
+                        <div class="cadre">✅Tickets terminés: {{$tickets->where("statut","✅")->count()}}</div>
+                        <div class="cadre">💰Tickets facturables en attente: {{$tickets->where("facturable","🪙")->count()}}</div>
                     </div>
                 </div>
                 
