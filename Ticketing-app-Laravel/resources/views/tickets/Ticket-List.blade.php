@@ -14,9 +14,9 @@
             <p>Tickets</p>
             <div class="filters-title"></div>
                 <div class="filters" aria-label="Filtres par genre">
-                    <button class="filter-btn-En-Cours" type="button">En cours</button>
-                    <button class="filter-btn-Non-Traite" type="button">Non traité</button>
-                    <button class="filter-btn-Money" type="button">Facturable</button>
+                    <a href="?filter=Working" class="filter-btn-En-Cours">En cours</a>
+                    <a href="?filter=Finish" class="filter-btn-Non-Traite">Traité</a>
+                    <a href="?filter=Facturable" class="filter-btn-Money">Facturable</a>
                 </div>
 
             <table class="Table-ticket" id="content">

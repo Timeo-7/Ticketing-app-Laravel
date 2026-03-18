@@ -20,7 +20,7 @@ class TicketSeeder extends Seeder
                 'client' => 'Client A',
                 'description' => 'L’utilisateur ne peut pas se connecter au portail.',
                 'project' => 'Projet Alpha',
-                'statut' => '⏳',
+                'statut' => "⌛",
                 'facturable' => '🪙',
             ],
             [
@@ -30,7 +30,7 @@ class TicketSeeder extends Seeder
                 'client' => 'Client B',
                 'description' => 'Le paiement échoue avec un code 500.',
                 'project' => 'Projet Beta',
-                'statut' => '❌',
+                'statut' => "✅",
                 'facturable' => '_',
             ],
             [
@@ -40,7 +40,7 @@ class TicketSeeder extends Seeder
                 'client' => 'Client C',
                 'description' => 'Le client demande un remboursement partiel.',
                 'project' => 'Projet Gamma',
-                'statut' => '⏳',
+                'statut' => "⌛",
                 'facturable' => '🪙',
             ],
             [
@@ -50,7 +50,7 @@ class TicketSeeder extends Seeder
                 'client' => 'Client D',
                 'description' => 'Les graphiques ne s’affichent pas correctement.',
                 'project' => 'Projet Alpha',
-                'statut' => '⏳',
+                'statut' => "⌛",
                 'facturable' => '_',
             ],
             [
@@ -60,7 +60,7 @@ class TicketSeeder extends Seeder
                 'client' => 'Client E',
                 'description' => 'L’utilisateur ne reçoit pas l’email de réinitialisation.',
                 'project' => 'Projet Beta',
-                'statut' => '✅',
+                'statut' => "✅",
                 
                 'facturable' => '🪙',
             ],

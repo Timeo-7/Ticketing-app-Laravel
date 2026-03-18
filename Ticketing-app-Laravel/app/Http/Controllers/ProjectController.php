@@ -10,7 +10,12 @@ class ProjectController extends Controller
 {
     public function ProjectList($id)
     {
+
         $projects = Project::where('user_id',$id)->get();
+
+
+
+
         return view('projects.Project-List', [
             "projects" => $projects,
             "id" => $id,

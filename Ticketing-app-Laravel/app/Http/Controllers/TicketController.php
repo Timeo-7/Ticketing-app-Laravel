@@ -8,9 +8,24 @@ use App\Models\Project;
 
 class TicketController extends Controller
 {
-    public function TicketList($id)
+    public function TicketList($id, Request $request)
     {
-        $tickets = Ticket::where('user_id',$id)->get();
+        $filter = $request->query("filter");
+
+        $query = Ticket::where('user_id', $id);
+
+        if($filter === "Working"){
+            $query->where('statut',"⌛");
+        }
+        if($filter === "Finish"){
+            $query->where('statut',"✅");
+        }
+        if($filter === "Facturable"){
+            $query->where('facturable',"🪙");
+        }
+
+        $tickets = $query->get();
+
         return view('tickets.Ticket-List', [
             "tickets" => $tickets,
             "id" => $id,
