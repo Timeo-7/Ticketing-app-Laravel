@@ -44,29 +44,12 @@ SUBMIT_TICKET.addEventListener("submit", function(event) {
     error += chek_ticket_success();
 
     if (error == 0) {
-        
-
-        // on peut soumettre le formulaire
-        // ici on peut faire une requete ajax pour envoyer les données du formulaire
-        console.log("formulaire soumis");
-
-        const TITLE_INPUT = document.querySelector("#ticket-title");
-        const CLIENT_INPUT = document.querySelector("#ticket-client");
-
-        console.log("title: " + TITLE_INPUT.value);
-        console.log("Client: " + CLIENT_INPUT.value);
+        SUBMIT_TICKET.submit();
 
         const VALID = document.querySelector(".ValidForms");
+        VALID.classList.remove("titanic");
+        setTimeout(() => VALID.classList.add("titanic"), 3000);
 
-            VALID.classList.remove("titanic");
-
-            setTimeout(function() {
-                VALID.classList.add("titanic");
-            }, 3000);
-
-
-        TITLE_INPUT.value = "";
-        CLIENT_INPUT.value = "";
     }
     });
 

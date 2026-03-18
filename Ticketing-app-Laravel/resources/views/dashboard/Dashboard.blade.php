@@ -63,7 +63,7 @@
 
                     <tbody>
                         @foreach($tickets as $ticket)
-                        <tr onclick="location.href='{{ route('tickets.Ticket', $ticket->id) }}'" style="cursor:pointer;">
+                       <tr onclick="window.location.href='{{ route('tickets.Ticket', ['id' => $ticket->id]) }}'" style="cursor:pointer;">
                             <td>{{ $ticket->title }}</td>
                             <td>{{ $ticket->client }}</td>
                             <td>{{ $ticket->statut }}</td>

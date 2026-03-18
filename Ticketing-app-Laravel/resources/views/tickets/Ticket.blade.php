@@ -6,22 +6,32 @@
 
         <div class="Ticket-Header">   
             <div>
-                <a class="back-button" href="{{ route('tickets.TicketList') }}">← Back to Tickets List</a>
+                <a class="back-button" href="{{ route('tickets.TicketList', $ticket->user_id) }}">← Back to Tickets List</a>
             </div>
 
             <div class="Right-buttons">
-                <div class="Edit-button">
-                    <button>✏️ Edit Ticket</button>
-                </div>
-                <div class="Supression-button">
-                    <button>Supprimer le ticket</button>
-                </div>
+                <a class="Edit-button" href="{{ route('tickets.Edit', $ticket->id) }}">✏️ Edit Ticket</a>
+                
+                <form class="Validate-button" action="{{ route('tickets.Validate', $ticket->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" >✅ Validate Ticket</button>
+                </form>
+
+                <form action="{{ route('tickets.Delete') }}" method="POST"  class="Supression-button">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="id" value="{{ $ticket->id }}">
+                    <button type="submit">Supprimer le ticket</button>
+                </form>
+                
             </div>
             
         </div>
         
 
-        <div class="Ticket-cadre">   
+        <div class="Ticket-cadre"> 
+            <h3>Title:</h3><p> {{$ticket->title}}</p>
             <h3>Client:</h3><p> {{$ticket->client}}</p>
             <h3>Project:</h3><p> {{$ticket->project}}</p>
             <h3>Description:</h3><p> {{$ticket->description}}</p>

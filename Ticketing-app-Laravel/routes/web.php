@@ -26,9 +26,14 @@ Route::get('/Inscription', [ConnexionController::class, 'Inscription'])->name('c
     Route::get('/Client-List', [ClientController::class, 'ClientList'])->name('clients.ClientList');
 
 
-    Route::get('/Ticket-List', [TicketController::class, 'TicketList'])->name('tickets.TicketList');
+    Route::get('/Ticket-List/{id}', [TicketController::class, 'TicketList'])->name('tickets.TicketList');
     Route::get('/Ticket/{id}', [TicketController::class, 'Ticket'])->name('tickets.Ticket');
-    Route::get('/Ticket-Form', [TicketController::class, 'TicketForm'])->name('tickets.TicketForm');
+    Route::get('/Ticket-Form/{id}', [TicketController::class, 'TicketForm'])->name('tickets.TicketForm');
+    Route::post('/Tickets/Store/{id}', [TicketController::class, 'Store'])->name('tickets.Store');
+    Route::delete('/Tickets', [TicketController::class, 'Delete'])->name('tickets.Delete');
+    Route::get('/tickets/{id}/Edit', [TicketController::class, 'Edit'])->name('tickets.Edit');
+    Route::put('/tickets/{id}/Update', [TicketController::class, 'Update'])->name('tickets.Update');
+    Route::put('/tickets/{id}/Validate', [TicketController::class, 'Validate'])->name('tickets.Validate');
 
     Route::get('/Project-List', [ProjectController::class, 'ProjectList'])->name('projects.ProjectList');
     Route::get('/Project', [ProjectController::class, 'Project'])->name('projects.Project');

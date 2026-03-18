@@ -18,6 +18,9 @@
     
     --danger: #c85a54;
     --danger-hover: #a64842;
+
+    --validate: #54c86b;
+    --validate-hover: #49a642;
     
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -419,6 +422,7 @@ h2 {
 
 .Edit-button {
     padding: 12px 24px;
+    margin: 20px;
     font-size: 16px;
     font-weight: 500;
     color: white;
@@ -442,6 +446,35 @@ h2 {
 
 .Edit-button:focus {
     outline: 3px solid var(--accent-secondary);
+    outline-offset: 2px;
+}
+
+.Validate-button {
+    padding: 12px 24px;
+    margin: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--validate);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.Validate-button:hover {
+    background-color: var(--validate-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.Validate-button:active {
+    transform: translateY(0);
+}
+
+.Validate-button:focus {
+    outline: 3px solid var(--validate-hover);
     outline-offset: 2px;
 }
 

@@ -5,7 +5,7 @@
 <section class="Tickets-List">
 
         <div>
-            <a class="new-ticket-button" href="{{ route('tickets.TicketForm') }}">+ New Ticket</a>
+            <a class="new-ticket-button" href="{{ route('tickets.TicketForm',['id' => $id]) }}">+ New Ticket</a>
         </div>
            
 
@@ -32,7 +32,7 @@
 
                 <tbody>
                     @foreach($tickets as $ticket)
-                    <tr onclick="location.href='{{ route('tickets.Ticket'), $ticket->id }}'" style="cursor:pointer;">
+                    <tr onclick="window.location.href='{{ route('tickets.Ticket', ['id' => $ticket->id]) }}'" style="cursor:pointer;">
                         <td>{{ $ticket->title }}</td>
                         <td>{{ $ticket->client }}</td>
                         <td>{{ $ticket->statut }}</td>
@@ -44,6 +44,13 @@
             </table>
 
         </div>
+
+        @if(isset($done))
+            <div class="ValidForms titanic">
+                <p>Formulaire envoyé</p>
+            </div>
+        @endif
+
     </section>
     
     <script src="../JS/Ticket-Page.js"></script>
