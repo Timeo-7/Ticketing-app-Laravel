@@ -30,14 +30,19 @@ Route::get('/Inscription', [ConnexionController::class, 'Inscription'])->name('c
     Route::get('/Ticket/{id}', [TicketController::class, 'Ticket'])->name('tickets.Ticket');
     Route::get('/Ticket-Form/{id}', [TicketController::class, 'TicketForm'])->name('tickets.TicketForm');
     Route::post('/Tickets/Store/{id}', [TicketController::class, 'Store'])->name('tickets.Store');
-    Route::delete('/Tickets', [TicketController::class, 'Delete'])->name('tickets.Delete');
+    Route::delete('/Tickets/Delete', [TicketController::class, 'Delete'])->name('tickets.Delete');
     Route::get('/tickets/{id}/Edit', [TicketController::class, 'Edit'])->name('tickets.Edit');
     Route::put('/tickets/{id}/Update', [TicketController::class, 'Update'])->name('tickets.Update');
     Route::put('/tickets/{id}/Validate', [TicketController::class, 'Validate'])->name('tickets.Validate');
 
-    Route::get('/Project-List', [ProjectController::class, 'ProjectList'])->name('projects.ProjectList');
-    Route::get('/Project', [ProjectController::class, 'Project'])->name('projects.Project');
-    Route::get('/Project-Form', [ProjectController::class, 'ProjectForm'])->name('projects.ProjectForm');
+    Route::get('/Project-List/{id}', [ProjectController::class, 'ProjectList'])->name('projects.ProjectList');
+    Route::get('/Project/{id}', [ProjectController::class, 'Project'])->name('projects.Project');
+    Route::get('/Project-Form/{id}', [ProjectController::class, 'ProjectForm'])->name('projects.ProjectForm');
+    Route::post('/Project/Store/{id}', [ProjectController::class, 'Store'])->name('projects.Store');
+    Route::delete('/Project/Delete', [ProjectController::class, 'Delete'])->name('projects.Delete');
+    Route::get('/Project/{id}/Edit', [ProjectController::class, 'Edit'])->name('projects.Edit');
+    Route::post('/Project/{id}/Update', [ProjectController::class, 'Update'])->name('projects.Update');
+    Route::post('/Project/{id}/Validate', [ProjectController::class, 'Validate'])->name('projects.Validate');
 
 
     Route::get('/Profil', [ProfilController::class, 'Profil'])->name('profil.Profil');

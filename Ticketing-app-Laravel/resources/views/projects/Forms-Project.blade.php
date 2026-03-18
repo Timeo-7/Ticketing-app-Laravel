@@ -7,13 +7,15 @@
 
          <div class="Ticket-Header">   
             <div>
-                <a class="back-button" href="{{ route('projects.ProjectList') }}">← Back to Projects List</a>
+                <a class="back-button" href="{{ route('projects.ProjectList', $id) }}">← Back to Projects List</a>
             </div>
             
         </div>
 
         <div>
-            <form id="submitform_project" action="./Tickets-List.html" method="GET">
+            <form id="submitform_project" action="{{ route('projects.Store', ["id" => $id]) }}" method="POST">
+                @csrf
+
                 <label for="project-title">Project Title:</label>
                 <input type="text" id="project-title" name="project-title">
                 <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
@@ -25,10 +27,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"></textarea>
                 <br>
-                <label for="colaborators">Colaborators:</label>
-                <input type="text" id="colaborators" name="colaborators"></input>
-
-                <label for="project-file">Contract : <input type="file" id="project-file" name="mon_fichier"  accept=".pdf,.doc,.docx"></label>
+                <label for="project-file">Contract : <input type="text" id="project-file" name="mon_fichier"  {{-- accept=".pdf,.doc,.docx" --}}></label>
                 <div id="file_error" class="error-text titanic">Le contrat est obligatoire.</div>
                 
                     
@@ -44,6 +43,6 @@
 
     </section>
 
-    <script src="{{ asset('js/Project-Forms.js') }}"></script>
+    {{-- <script src="{{ asset('js/Project-Forms.js') }}"></script> --}}
 
 @endsection

@@ -9,7 +9,7 @@
 
                 <div class="stats-list-clients">
                     <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: 36</a>
-                    <a class="cadre" href="{{ route('projects.ProjectList') }}">Projects: 45</a>
+                    <a class="cadre" href="{{ route('projects.ProjectList', $id) }}">Projects: 45</a>
                     <a class="cadre" href="{{ route('tickets.TicketList', $id) }}">Tickets: 125</a>
                 </div>
 
@@ -35,10 +35,10 @@
         <div>
             <div class="access-list">
                 <div class="cadre">   
-                    <a href="{{ route('projects.ProjectList') }}">Projects</a>
+                    <a href="{{ route('projects.ProjectList', $id) }}">Projects</a>
                      @foreach ($projects as $project)
 
-                        <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
+                        <a class="projects-fast-access" href="{{ route('projects.Project',$project->id) }}" >
                             <p>{{$project->title}}</p>
                             <p>{{$project->workingTickets}}x🧾</p>
                         </a>

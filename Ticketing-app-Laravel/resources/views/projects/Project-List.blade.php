@@ -5,7 +5,7 @@
 <section class="Projects-List">
            
          <div>
-            <a class="new-ticket-button" href="{{ route('projects.ProjectForm') }}">+New Project</a>
+            <a class="new-ticket-button" href="{{ route('projects.ProjectForm', ['id' => $id]) }}">+New Project</a>
         </div>
 
         <div class="access-list">
@@ -13,7 +13,7 @@
                     <p>Projects</p>
                     @foreach ($projects as $project)
 
-                    <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
+                    <a class="projects-fast-access" href="{{ route('projects.Project', ['id' => $project->id]) }}" >
                          <p>{{$project->title}}</p>
                          <p>{{$project->workingTickets}}x🧾</p>
                     </a>

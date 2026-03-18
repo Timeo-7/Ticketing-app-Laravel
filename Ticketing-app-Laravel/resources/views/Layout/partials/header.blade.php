@@ -7,7 +7,7 @@
         <h2>Welcome</h2>
         <nav>
             <a href="{{ route('dashboard.Dashboard',1) }}">Dashboard</a>
-            <a href="{{ route('projects.ProjectList') }}">Projects</a>
+            <a href="{{ route('projects.ProjectList', 1) }}">Projects</a>
             <a href="{{ route('tickets.TicketList',1) }}">Tickets</a>
             
             <div class="Profile-drop">
