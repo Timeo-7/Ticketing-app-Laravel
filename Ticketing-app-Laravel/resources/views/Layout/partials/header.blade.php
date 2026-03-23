@@ -1,21 +1,28 @@
 <header>
         <div class="logo">
-            <a href="{{ route('dashboard.Dashboard', 1) }}">
+            <a href="{{ route('dashboard') }}">
                 <img src="{{asset('asset/img/Logo.png')}}" alt="Logo de moi hyper bg">
             </a>
         </div>
-        <h2>Welcome</h2>
+        <h2>Welcome {{auth()->user()->name}}</h2>
         <nav>
-            <a href="{{ route('dashboard.Dashboard',1) }}">Dashboard</a>
-            <a href="{{ route('projects.ProjectList', 1) }}">Projects</a>
-            <a href="{{ route('tickets.TicketList',1) }}">Tickets</a>
+            <a href="{{ route('dashboard') }}">Dashboard</a>
+            <a href="{{ route('projects.ProjectList') }}">Projects</a>
+            <a href="{{ route('tickets.TicketList') }}">Tickets</a>
             
             <div class="Profile-drop">
                 <button class="Drop-button">☰</button>
                 <div class="Drop-content">
                     <a href="{{ route('profil.Profil') }}">Profile</a>
                     <a href="{{ route('settings.Settings') }}">Settings</a>
-                    <a href="{{ route('connexion.Connexion') }}">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" class="Button_Form">
+                    @csrf
+                    <a :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </a>
+                    </form>
                 </div>   
                 
             </div>

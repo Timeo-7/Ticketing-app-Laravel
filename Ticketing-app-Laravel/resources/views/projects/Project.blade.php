@@ -11,13 +11,13 @@
             </div>
 
             <div class="Right-buttons">
-                <a class="Edit-button" href="{{ route('projects.Edit', $project->id) }}">✏️ Edit Ticket</a>
+                <a class="Edit-button" href="{{ route('projects.Edit', $project->id) }}">✏️ Edit Project</a>
 
                 <form action="{{ route('projects.Delete') }}" method="POST"  class="Supression-button">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="id" value="{{ $project->id }}">
-                    <button type="submit">Supprimer le ticket</button>
+                    <button type="submit">Supprimer le projet</button>
                 </form>
             </div>
             

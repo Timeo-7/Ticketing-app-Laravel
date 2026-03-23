@@ -29,10 +29,12 @@
                 <textarea id="description" name="description" value="{{$ticket->description}}"></textarea>
                 <br>
                 <label for="project">Project:</label>
-                <select id="idProject" name="project">
-                    <option value="No project">No project</option>
-                    <option value="project1">Project 1</option>
-                    <option value="project2">Project 2</option>
+                <select type="text" id="projet" name="project">
+                    <option value="No-Project">No Project</option>
+                    @foreach ($projects as $project)
+                        <option value="{{$project->title}}">{{$project->title}}</option>
+                    @endforeach
+                    
                 </select>
                 <label for="facturable"> Facturable : <input type="checkbox" id="facturable" name="facturable" value="1" {{ $ticket->facturable === '🪙' ? 'checked' : '' }}> </label>
                     

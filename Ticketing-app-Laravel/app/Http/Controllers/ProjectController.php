@@ -8,8 +8,9 @@ use App\Models\Ticket;
 
 class ProjectController extends Controller
 {
-    public function ProjectList($id)
+    public function ProjectList()
     {
+        $id = auth()->user()->id;
 
         $projects = Project::where('user_id',$id)->get();
 
@@ -24,6 +25,7 @@ class ProjectController extends Controller
 
     public function Project($id)
     {
+
         $project = Project::find($id);
         $tickets = Ticket::where('project_id',$id)->get();
 
@@ -33,15 +35,19 @@ class ProjectController extends Controller
         ]);
     }
     
-    public function ProjectForm($id)
+    public function ProjectForm()
     {
+        $id = auth()->user()->id;
+
         return view('projects.Forms-Project', [
             "id" => $id
             ]);
     }
 
-    public function Store(Request $request, $id)
+    public function Store(Request $request)
     {
+        $id = auth()->user()->id;
+
         $done = false;
         $validated = $request->validate([
             'project-title' => ['required', 'string', 'max:255'],
@@ -73,7 +79,7 @@ class ProjectController extends Controller
 
 
     
-    public function Update(Request $request, $id)
+    public function Update($id, Request $request)
     {
 
         $project = Project::find($id);
@@ -99,6 +105,7 @@ class ProjectController extends Controller
 
     public function Edit($id)
     {
+
         $project = Project::find($id);
     
 

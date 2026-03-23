@@ -8,8 +8,9 @@ use App\Models\Project;
 
 class DashboardController extends Controller
 {
-    public function Dashboard($id)
+    public function Dashboard()
     {
+        $id = $id = auth()->user()->id;
         $tickets = Ticket::where('user_id',$id)->get();
         $projects = Project::where('user_id',$id)->get();
 

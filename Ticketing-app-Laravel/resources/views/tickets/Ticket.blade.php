@@ -15,7 +15,12 @@
                 <form class="Validate-button" action="{{ route('tickets.Validate', $ticket->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <button type="submit" >✅ Validate Ticket</button>
+                    @if($ticket->statut == "✅")
+                        <button type="submit" >⌛ Working Ticket</button>
+                    @else
+                         <button type="submit" >✅ Validate Ticket</button>
+                    @endif
+
                 </form>
 
                 <form action="{{ route('tickets.Delete') }}" method="POST"  class="Supression-button">

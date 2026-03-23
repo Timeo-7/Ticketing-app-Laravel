@@ -8,8 +8,10 @@ use App\Models\Project;
 
 class TicketController extends Controller
 {
-    public function TicketList($id, Request $request)
+    public function TicketList(Request $request)
     {
+        $id = auth()->user()->id;
+
         $filter = $request->query("filter");
 
         $query = Ticket::where('user_id', $id);
@@ -34,6 +36,7 @@ class TicketController extends Controller
 
     public function Ticket($id)
     {
+
         $ticket = Ticket::find($id);
 
         return view('tickets.Ticket', [
@@ -41,8 +44,9 @@ class TicketController extends Controller
         ]);
     }
 
-    public function TicketForm($id)
+    public function TicketForm()
     {
+        $id = auth()->user()->id;
         $projects = Project::where("user_id", $id)->get();
         return view('tickets.Forms-Ticket', [
             "id" => $id,
@@ -50,8 +54,9 @@ class TicketController extends Controller
         ]);
     }
 
-    public function Store(Request $request, $id)
+    public function Store(Request $request)
     {
+        $id = auth()->user()->id;
         $done = false;
         $validated = $request->validate([
             'ticket-title' => ['required', 'string', 'max:255'],
@@ -68,8 +73,15 @@ class TicketController extends Controller
             $project = Project::where('title', $validated['project'])->first();
             $project_id = $project ? $project->id : null;
         } else {
-            $project_id = null;
+            $project_id = -1;
         }
+
+        $project = Project::find($project_id);
+        if ($project) {
+            $project->workingTickets = $project->workingTickets + 1;
+            $project->save();
+        }
+
 
         Ticket::create([
             'user_id' => $id,
@@ -78,7 +90,7 @@ class TicketController extends Controller
             'description' => $validated['description'] ?? "",
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
-            'project_id' => $project_id,
+            'project_id' => $project_id ?? -1 ,
             'statut' => "⌛",
         ]);
 
@@ -87,9 +99,9 @@ class TicketController extends Controller
         return redirect()->route('tickets.TicketList', ['id' => $id, 'done' => $done]);
     }
 
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
-
+       
         $ticket = Ticket::find($id);
 
         $project_id = Project::where('user_id',$ticket->user_id)->get();
@@ -119,21 +131,43 @@ class TicketController extends Controller
     }
 
     public function Validate($id){
+
         $ticket = Ticket::find($id);
 
-        $ticket->update([
-            'statut' => "✅",
-        ]);
+        if($ticket->statut == "✅"){
+            $ticket->update([
+                'statut' => "⌛",
+            ]);
+
+            $project = Project::find($tickets->project_id);
+            if ($project) {
+                $project->workingTickets = $project->workingTickets + 1; // ou autre logique
+                $project->save();
+            }
+        }
+        else{
+            $project = Project::find($tickets->project_id);
+            if ($project) {
+                $project->workingTickets = $project->workingTickets - 1; // ou autre logique
+                $project->save();
+            }
+            $ticket->update([
+                'statut' => "✅",
+            ]);
+        }
+        
         return redirect()->route('tickets.Ticket', $id);
     }
 
     public function Edit($id)
     {
         $ticket = Ticket::find($id);
-    
+        $u_id = $ticket->user_id;
+        $projects = Project::where("user_id", $u_id)->get();
 
         return view('tickets.Update-Ticket', [
             "ticket" => $ticket,
+            "projects" => $projects,
         ]);
     }
 
