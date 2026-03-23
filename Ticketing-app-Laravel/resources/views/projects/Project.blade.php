@@ -42,11 +42,11 @@
                 </tr>
                 <tr>
                     <td>Tickets en cours: </td>
-                    <td>{{$project->workingTickets}}</td>
+                    <td>{{$project->workingTickets}}⌛</td>
                 </tr>
                 <tr>
                     <td>Tickets terminés:</td> 
-                    <td>{{$project->waitingTickets}}</td>
+                    <td>{{$project->completeTickets}}✅</td>
                 </tr>
             </table>
 
@@ -56,7 +56,7 @@
                 </tr>
                 @foreach ($tickets as $ticket)
                     <tr>
-                        <td><a href="{{route('tickets.Ticket',["id" => $ticket->id])}}l">{{$ticket->title}}</a></td>
+                        <td><a href="{{route('tickets.Ticket',["id" => $ticket->id])}}">{{$ticket->title}}</a></td>
                         <td>{{$ticket->statut}}</td>
                     </tr>
                 @endforeach

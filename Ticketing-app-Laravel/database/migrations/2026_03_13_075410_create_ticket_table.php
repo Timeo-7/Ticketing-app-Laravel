@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('project_id')->constrained('projects')->cascadeOnDelete();;
+            $table->Integer('project_id')->constrained('projects')->cascadeOnDelete();;
             $table->string('title');
             $table->string('client');
             $table->string('description');

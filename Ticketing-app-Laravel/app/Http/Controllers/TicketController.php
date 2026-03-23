@@ -79,6 +79,7 @@ class TicketController extends Controller
         $project = Project::find($project_id);
         if ($project) {
             $project->workingTickets = $project->workingTickets + 1;
+            $project->ticketNumber = Ticket::where('project_id', $project->id)->count();
             $project->save();
         }
 
@@ -103,19 +104,26 @@ class TicketController extends Controller
     {
        
         $ticket = Ticket::find($id);
-
-        $project_id = Project::where('user_id',$ticket->user_id)->get();
         
-
         $validated = $request->validate([
             'ticket-title' => ['required', 'string', 'max:255'],
             'ticket-client' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'project' => ['nullable', 'string'],
             'facturable' => ['nullable'],
-            'project_id' => $project_id,
+            'project_id' => ['nullable','string'],
         ]);
 
+        $Prev_project = Project::find($ticket->project_id);
+        if ($Prev_project) {
+            if($ticket->statut == "⌛"){
+                $Prev_project->workingTickets = ($project->workingTickets ?? 0) - 1;
+            }
+            $Prev_project->save();
+        }
+
+        $project_id = Project::where('title',$validated['project'])->first();
+        $project_id = $project_id->id;
 
         $ticket->update([
             'title' => $validated['ticket-title'],
@@ -123,9 +131,22 @@ class TicketController extends Controller
             'description' => $validated['description'] ?? $ticket->description, 
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
-            'project_id' => $project_id ?? "No project",
+            'project_id' => $project_id ?? -1,
             'statut' => $ticket->statut,
         ]);
+
+        /* dd($Prev_project); */
+
+        $Prev_project->ticketNumber = Ticket::where('project_id', $Prev_project->id)->count();
+
+        $project = Project::find($project_id);
+        if ($project) {
+            if($ticket->statut == "⌛"){
+                $project->workingTickets = ($project->workingTickets ?? 0) + 1;
+            }
+            $project->ticketNumber = Ticket::where('project_id', $project->id)->count();
+            $project->save();
+        }
 
         return redirect()->route('tickets.Ticket', $id);
     }
@@ -139,16 +160,16 @@ class TicketController extends Controller
                 'statut' => "⌛",
             ]);
 
-            $project = Project::find($tickets->project_id);
+            $project = Project::find($ticket->project_id);
             if ($project) {
-                $project->workingTickets = $project->workingTickets + 1; // ou autre logique
+                $project->workingTickets = $project->workingTickets + 1;
                 $project->save();
             }
         }
         else{
-            $project = Project::find($tickets->project_id);
+            $project = Project::find($ticket->project_id);
             if ($project) {
-                $project->workingTickets = $project->workingTickets - 1; // ou autre logique
+                $project->workingTickets = $project->workingTickets - 1;
                 $project->save();
             }
             $ticket->update([
@@ -179,9 +200,22 @@ class TicketController extends Controller
 
         $ticket = Ticket::findOrFail($validated['id']);
 
+        
+
+        if($ticket->statut == "⌛"){
+            $project = Project::find($ticket->project_id);
+            if ($project) {
+                $project->workingTickets = $project->workingTickets - 1; // ou autre logique
+                $project->save();
+            }
+        }
+
         $user_id = $ticket->user_id;
+        $project_id = $ticket->project_id;
 
         $ticket->delete();
+
+        $project->ticketNumber = Ticket::where('project_id', $project_id)->count();
 
         return redirect()->route('tickets.TicketList', $user_id);
     }

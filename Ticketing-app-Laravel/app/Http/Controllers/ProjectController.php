@@ -14,9 +14,6 @@ class ProjectController extends Controller
 
         $projects = Project::where('user_id',$id)->get();
 
-
-
-
         return view('projects.Project-List', [
             "projects" => $projects,
             "id" => $id,
@@ -27,7 +24,10 @@ class ProjectController extends Controller
     {
 
         $project = Project::find($id);
-        $tickets = Ticket::where('project_id',$id)->get();
+
+        $query = Ticket::where('user_id', $project->user_id);
+        $query->where('project_id',$project->id);
+        $tickets = $query->get();
 
         return view('projects.Project', [
             "project" => $project,
@@ -69,7 +69,7 @@ class ProjectController extends Controller
             'contract' => "No file",
             'ticketNumber' => 0,
             'workingTickets' => 0,
-            'waitingTickets' => 0,
+            'completeTickets' => 0,
         ]);
 
         $done = true;
@@ -121,6 +121,11 @@ class ProjectController extends Controller
         ]);
 
         $project = Project::findOrFail($validated['id']);
+
+        $tickets = Ticket::where('project_id',$project->id)->get();
+        foreach($tickets as $ticket){
+            $ticket->delete();
+        }
 
         $user_id = $project->user_id;
 

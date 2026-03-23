@@ -13,7 +13,7 @@ class Project extends Model
         "description",
         "ticketNumber",
         "workingTickets",
-        "waitingTickets",
+        "completeTickets",
         "contract",
         "user_id",
     ];

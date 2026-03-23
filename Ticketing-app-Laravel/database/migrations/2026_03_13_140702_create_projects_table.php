@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('ticketNumber');
             $table->string('workingTickets');
-            $table->string('waitingTickets');
+            $table->string('completeTickets');
             $table->string('contract');
             $table->timestamps();
         });
