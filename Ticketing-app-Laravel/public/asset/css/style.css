@@ -285,6 +285,7 @@ h2 {
 
 .cadre {
     background-color: var(--bg-secondary);
+    margin: 5px;
     display: flex;
     flex-direction: column;
     flex: 1;

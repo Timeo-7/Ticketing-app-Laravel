@@ -116,8 +116,14 @@ class TicketController extends Controller
 
         $Prev_project = Project::find($ticket->project_id);
         if ($Prev_project) {
+            $query = Ticket::where('user_id', auth()->user()->id);
             if($ticket->statut == "⌛"){
-                $Prev_project->workingTickets = ($project->workingTickets ?? 0) - 1;
+                $workingCount = $query->where('statut', "⌛")->count();
+                $Prev_project->workingTickets = $workingCount;
+            }
+            else{
+                $completeCount = $query->where('statut', "✅")->count();
+                $Prev_project->completeTickets =  $completeCount;
             }
             $Prev_project->save();
         }
@@ -137,14 +143,24 @@ class TicketController extends Controller
 
         /* dd($Prev_project); */
 
-        $Prev_project->ticketNumber = Ticket::where('project_id', $Prev_project->id)->count();
+        $totalCount = Ticket::where('project_id', $Prev_project->id)->count();
+        $Prev_project->ticketNumber = $totalCount;
 
         $project = Project::find($project_id);
         if ($project) {
+            $query = Ticket::where('user_id', auth()->user()->id);
             if($ticket->statut == "⌛"){
-                $project->workingTickets = ($project->workingTickets ?? 0) + 1;
+                $workingCount = $query->where('statut', "⌛")->count();
+                $project->workingTickets = $workingCount;
             }
-            $project->ticketNumber = Ticket::where('project_id', $project->id)->count();
+            else{
+                $completeCount = $query->where('statut', "✅")->count();
+                $project->completeTickets =  $completeCount;
+            }
+
+            $totalCount = Ticket::where('project_id', $project->id)->count();
+            $project->ticketNumber = $totalCount;
+
             $project->save();
         }
 
@@ -161,20 +177,34 @@ class TicketController extends Controller
             ]);
 
             $project = Project::find($ticket->project_id);
+            $query = Ticket::where('user_id', auth()->user()->id);
+            $query2 = $query;
             if ($project) {
-                $project->workingTickets = $project->workingTickets + 1;
+                $workingCount = $query->where('statut', "⌛")->count();
+                $project->workingTickets = $workingCount + 1;
+
+                $completeCount = $query2->where('statut', "✅")->count();
+                $project->completeTickets = $completeCount -1;
+
                 $project->save();
             }
         }
         else{
-            $project = Project::find($ticket->project_id);
-            if ($project) {
-                $project->workingTickets = $project->workingTickets - 1;
-                $project->save();
-            }
             $ticket->update([
                 'statut' => "✅",
             ]);
+            $project = Project::find($ticket->project_id);
+            $query = Ticket::where('user_id', auth()->user()->id);
+            $query2 = $query;
+            if ($project) {
+                $workingCount = $query->where('statut', "⌛")->count();
+                $project->workingTickets = $workingCount - 1;
+
+                $completeCount = $query2->where('statut', "✅")->count();
+                $project->completeTickets = $completeCount + 1;
+
+                $project->save();
+            }
         }
         
         return redirect()->route('tickets.Ticket', $id);
@@ -200,22 +230,28 @@ class TicketController extends Controller
 
         $ticket = Ticket::findOrFail($validated['id']);
 
-        
-
-        if($ticket->statut == "⌛"){
             $project = Project::find($ticket->project_id);
             if ($project) {
-                $project->workingTickets = $project->workingTickets - 1; // ou autre logique
+                $query = Ticket::where('user_id', auth()->user()->id);
+                if($ticket->statut == "⌛"){
+                    $workingCount = $query->where('statut', "⌛")->count();
+                    $project->workingTickets = $workingCount;
+                }
+                else{
+                    $completeCount = $query->where('statut', "✅")->count();
+                    $project->completeTickets =  $completeCount;
+                }
                 $project->save();
             }
-        }
 
         $user_id = $ticket->user_id;
         $project_id = $ticket->project_id;
 
         $ticket->delete();
 
-        $project->ticketNumber = Ticket::where('project_id', $project_id)->count();
+
+        $totalCount = Ticket::where('project_id', $project->id)->count();
+        $Prev_project->ticketNumber = $totalCount;
 
         return redirect()->route('tickets.TicketList', $user_id);
     }
