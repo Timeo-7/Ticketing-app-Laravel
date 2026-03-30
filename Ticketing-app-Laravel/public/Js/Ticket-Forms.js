@@ -1,56 +1,61 @@
 console.log("Ticket-Forms.js loaded");
 
+document.addEventListener('DOMContentLoaded', function () {
 
-function chek_ticket_success() {
-    let res = 0;
+    const modal = document.querySelector('[data-ticket-modal]');
+    const openBtn = document.querySelector('[data-open-ticket-modal]');
+    const closeBtn = document.querySelector('[data-close-ticket-modal]');
 
-    const TITLE_INPUT = document.querySelector("#ticket-title");
-    const CLIENT_INPUT = document.querySelector("#ticket-client");
-
-    const TITLE_ERROR = document.querySelector("#title_error");
-
-    if (TITLE_INPUT.value == "") {
-
-        TITLE_ERROR.classList.remove("titanic");
-        res ++;
-        
-    } else {
-        TITLE_ERROR.classList.add("titanic");
+    // Ouvrir modal
+    if (openBtn && modal) {
+        openBtn.addEventListener('click', () => modal.showModal());
     }
 
-    const CLIENT_ERROR = document.querySelector("#client_error");
-
-    if(CLIENT_INPUT.value == ""){
-         CLIENT_ERROR.classList.remove("titanic");
-        res ++;
-    }
-    else{
-        CLIENT_ERROR.classList.add("titanic");
+    // Fermer modal
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', () => modal.close());
     }
 
-    return res;
+    function chek_ticket_success() {
+        let res = 0;
 
-    
-}
+        const TITLE_INPUT = document.querySelector("#ticket-title");
+        const CLIENT_INPUT = document.querySelector("#ticket-client");
 
-const SUBMIT_TICKET = document.querySelector("#submitform_ticket");
+        const TITLE_ERROR = document.querySelector("#title_error");
+        const CLIENT_ERROR = document.querySelector("#client_error");
 
-SUBMIT_TICKET.addEventListener("submit", function(event) {
-       // on empeche la soumission du formulaire
-    // pour éviter le rechargement de page
-    event.preventDefault();
+        if (TITLE_INPUT.value === "") {
+            TITLE_ERROR.classList.remove("titanic");
+            res++;
+        } else {
+            TITLE_ERROR.classList.add("titanic");
+        }
 
-    let error = 0;
-    error += chek_ticket_success();
+        if (CLIENT_INPUT.value === "") {
+            CLIENT_ERROR.classList.remove("titanic");
+            res++;
+        } else {
+            CLIENT_ERROR.classList.add("titanic");
+        }
 
-    if (error == 0) {
-        SUBMIT_TICKET.submit();
-
-        const VALID = document.querySelector(".ValidForms");
-        VALID.classList.remove("titanic");
-        setTimeout(() => VALID.classList.add("titanic"), 3000);
-
+        return res;
     }
-    });
 
+    const SUBMIT_TICKET = document.querySelector("#submitform_ticket");
 
+    if (SUBMIT_TICKET) {
+        SUBMIT_TICKET.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let error = chek_ticket_success();
+
+            if (error === 0) {
+                SUBMIT_TICKET.submit();
+
+                if (modal) modal.close();
+            }
+        });
+    }
+
+});

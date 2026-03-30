@@ -10,6 +10,14 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SettingsController;
 
+
+Route::middleware('auth')->group(function () {
+    Route::post('/tickets', [TicketController::class, 'storeApi'])->name('tickets.storeApi');
+    Route::put('/tickets/{id}', [TicketController::class, 'updateApi'])->name('tickets.updateApi');
+    Route::put('/tickets/{id}/validate', [TicketController::class, 'validateApi'])->name('tickets.validateApi');
+    Route::delete('/tickets/{id}', [TicketController::class, 'deleteApi'])->name('tickets.deleteApi');
+});
+
 Route::get('/', function () {
     return view('auth.login');
 });

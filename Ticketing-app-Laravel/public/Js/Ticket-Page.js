@@ -1,82 +1,47 @@
-  // On veut gérer les filtres
-// je selectionne tous les filtres
-const FILTRE_EN_COURS = document.querySelector(".filter-btn-En-Cours");
 
 
-FILTRE_EN_COURS.addEventListener("click", function(event) {
+    const apiBaseUrl = "{{ url('/api/tickets') }}";
 
-
-    const trs = document.querySelectorAll('#content tbody tr');
-
-         for (let j=0; j < trs.length ; j++) {
-        // Je veux parcourir mon tableau
-            console.log(trs[j]);
-            const statut = trs[j].querySelector(".Statut");
-            // texte de la case dans le tableau
-            console.log(statut.innerText);
-
-            // Je veux comparer mon texte du bouton, avec celui de la case du tableau
-            // Si le texte est différent, on cache la ligne
-
-            if (statut.innerText.trim() != '⏳') {
-                trs[j].classList.add('titanic');
-            } else {
-                trs[j].classList.remove('titanic');
+    document.querySelectorAll('[data-validate-ticket]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const ticketId = btn.dataset.validateTicket;
+            const token = "{{ auth()->user()->currentAccessToken()->plainTextToken ?? '' }}";
+            try {
+                const res = await fetch(`${apiBaseUrl}/${ticketId}/validate`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if(res.ok) {
+                    const data = await res.json();
+                    document.getElementById('ticket-statut').innerText = data.statut;
+                    btn.innerText = data.statut === '✅' ? '⌛ Working Ticket' : '✅ Validate Ticket';
+                }
+            } catch(err) {
+                console.error(err);
             }
+        });
+    });
 
-        }
-});
-
-const FILTRE_NON_TRAITE = document.querySelector(".filter-btn-Non-Traite");
-
-
-
-FILTRE_NON_TRAITE.addEventListener("click", function(event) {
-
-    const trs = document.querySelectorAll('#content tbody tr');
-
-         for (let j=0; j < trs.length ; j++) {
-        // Je veux parcourir mon tableau
-            console.log(trs[j]);
-            const statut = trs[j].querySelector(".Statut");
-            // texte de la case dans le tableau
-            console.log(statut.innerText);
-
-            // Je veux comparer mon texte du bouton, avec celui de la case du tableau
-            // Si le texte est différent, on cache la ligne
-
-            if (statut.innerText.trim() != '❌') {
-                trs[j].classList.add('titanic');
-            } else {
-                trs[j].classList.remove('titanic');
+    document.querySelectorAll('[data-delete-ticket]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            if(!confirm('Are you sure you want to delete this ticket?')) return;
+            const ticketId = btn.dataset.deleteTicket;
+            const token = "{{ auth()->user()->currentAccessToken()->plainTextToken ?? '' }}";
+            try {
+                const res = await fetch(`${apiBaseUrl}/${ticketId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if(res.ok) {
+                    window.location.href = "{{ route('tickets.TicketList', $ticket->user_id) }}";
+                }
+            } catch(err) {
+                console.error(err);
             }
-
-        }
-});
-
-const FILTRE_MONEY = document.querySelector(".filter-btn-Money");
-
-
-
-FILTRE_MONEY.addEventListener("click", function(event) {
-
-    const trs = document.querySelectorAll('#content tbody tr');
-
-         for (let j=0; j < trs.length ; j++) {
-        // Je veux parcourir mon tableau
-            console.log(trs[j]);
-            const statut = trs[j].querySelector(".Money");
-            // texte de la case dans le tableau
-            console.log(statut.innerText);
-
-            // Je veux comparer mon texte du bouton, avec celui de la case du tableau
-            // Si le texte est différent, on cache la ligne
-
-            if (statut.innerText.trim() != '🪙') {
-                trs[j].classList.add('titanic');
-            } else {
-                trs[j].classList.remove('titanic');
-            }
-
-        }
-});
+        });
+    });

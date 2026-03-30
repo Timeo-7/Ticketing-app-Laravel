@@ -488,6 +488,7 @@ h2 {
 }
 
 .Supression-button {
+    margin: 20px;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 500;
@@ -572,6 +573,105 @@ h2 {
 }
 /* ==================== Forms-New-Tickets/Project ==================== */
 
+/* Style pour le modal dialog */
+dialog[data-ticket-modal] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 1000;
+}
+
+/* Backdrop (fond sombre) */
+dialog[data-ticket-modal]::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Fermer le modal visible */
+dialog[data-ticket-modal][open] {
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Style du bouton fermer */
+dialog[data-ticket-modal] {
+    width: 800px;           /* Largeur */
+    height: 1000px;           /* Largeur */
+    max-width: 100%;         /* Max 90% de l'écran */
+    max-height: 100%;       /* Hauteur max */
+    padding: 30px;
+}
+
+button[data-close-ticket-modal] {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+button[data-close-ticket-modal]:hover {
+    color: #000;
+}
+
+/* Styling du formulaire */
+dialog[data-ticket-modal] form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+dialog[data-ticket-modal] label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+dialog[data-ticket-modal] input,
+dialog[data-ticket-modal] textarea,
+dialog[data-ticket-modal] select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+dialog[data-ticket-modal] button[type="submit"] {
+      width: 600px;           /* Largeur */
+    max-width: 90%;         /* Max 90% de l'écran */
+    max-height: 80vh; 
+
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+dialog[data-ticket-modal] button[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
 .Forms-Cadre {
     background-color: var(--bg-secondary);
