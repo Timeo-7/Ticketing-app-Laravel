@@ -2,6 +2,8 @@
 
 @section('content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <section class="Tickets-List" data-ticket-page data-api-token="{{ auth()->user()->createToken('frontend-token')->plainTextToken }}">
 
     <!-- Header -->
@@ -12,7 +14,7 @@
 
         <div class="Right-buttons">
             <!-- Bouton ouverture modal update -->
-            <button class="Edit-button" data-open-ticket-modal-update>✏️ Edit Ticket</button>
+            <button class="Edit-button" data-open-ticket-modal-update data-ticket-id="{{$ticket->id}}">✏️ Edit Ticket</button>
 
             <!-- Bouton Validate -->
             <button class="Validate-button" data-validate-ticket="{{ $ticket->id }}">
@@ -24,7 +26,7 @@
             </button>
 
             <!-- Bouton Delete -->
-            <button class="Supression-button" data-delete-ticket="{{ $ticket->id }}">
+            <button class="Supression-button" action="{{route("tickets.Delete")}}">
                 Supprimer le ticket
             </button>
         </div>
@@ -70,55 +72,44 @@
         </table>
     </div>
 
-    <!-- ================= MODAL UPDATE ================= -->
-    <dialog data-ticket-modal>
+   <!-- Modal Update -->
+<dialog data-ticket-modal>
+    <button data-close-ticket-modal>✖</button>
+    <h3>Modifier le ticket</h3>
 
-        <button data-close-ticket-modal>✖</button>
+    <form id="submitform_ticket">
+        @csrf
+        @method('PUT')
 
-        <h3>Modifier le ticket</h3>
+        <label>Ticket Title:</label>
+        <input type="text" id="ticket-title" name="ticket-title" value="{{ $ticket->title }}">
+        <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
 
-        <form 
-            id="submitform_ticket" 
-            data-ticket-api-form
-            data-api-token="{{ auth()->user()->createToken('frontend-token')->plainTextToken }}"
-            action="{{ route('tickets.updateApi', $ticket->id) }}" 
-            method="POST"
-        >
-            @csrf
-            @method('PUT')
-            <label>Ticket Title:</label>
-            <input type="text" id="ticket-title" name="ticket-title" value="{{ $ticket->title }}">
-            <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
+        <label>Description:</label>
+        <textarea id="description" name="description">{{ $ticket->description }}</textarea>
 
-            <label>Client:</label>
-            <input type="text" id="ticket-client" name="ticket-client" value="{{ $ticket->client }}">
-            <div id="client_error" class="error-text titanic">Le client est obligatoire.</div>
+        <label>Project:</label>
+        <select id="project" name="project">
+            <option value="No-Project">No Project</option>
+            @foreach ($projects as $project)
+                <option value="{{ $project->title }}" {{ $ticket->project === $project->title ? 'selected' : '' }}>
+                    {{ $project->title }}
+                </option>
+            @endforeach
+        </select>
 
-            <label>Description:</label>
-            <textarea id="description" name="description">{{ $ticket->description }}</textarea>
+        <label>
+            Facturable
+            <input type="checkbox" id="facturable" name="facturable" value="1" {{ $ticket->facturable === '🪙' ? 'checked' : '' }}>
+        </label>
 
-            <label>Project:</label>
-            <select id="project" name="project">
-                <option value="No-Project">No Project</option>
-                @foreach ($projects as $project)
-                    <option value="{{ $project->title }}" {{ $ticket->project === $project->title ? 'selected' : '' }}>
-                        {{ $project->title }}
-                    </option>
-                @endforeach
-            </select>
-
-            <label>
-                Facturable
-                <input type="checkbox" id="facturable" name="facturable" value="1" {{ $ticket->facturable === '🪙' ? 'checked' : '' }}>
-            </label>
-
-            <button type="submit" class="Submit-button" data-ticket-submit-button>Mettre à jour</button>
-        </form>
-    </dialog>
+        <button type="submit" class="Submit-button" data-ticket-submit-button>Mettre à jour</button>
+    </form>
+</dialog>
 
 </section>
 
-<script src="{{ asset('js/ticket-Page.js') }}"></script>
 <script src="{{ asset('js/tickets-modalEdit.js') }}"></script>
+<script src="{{ asset('js/ticket-Page.js') }}"></script>
 
 @endsection

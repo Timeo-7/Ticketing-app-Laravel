@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (SUBMIT_TICKET) {
         SUBMIT_TICKET.addEventListener("submit", function(event) {
-            event.preventDefault();
+
+            if (modal) modal.close();
 
             let error = chek_ticket_success();
 

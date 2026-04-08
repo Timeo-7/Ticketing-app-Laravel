@@ -2,6 +2,9 @@
 
 @section('content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 <section class="Tickets-List" data-ticket-page>
 
     <!-- Bouton ouverture modal -->
@@ -9,7 +12,7 @@
         <button class="new-ticket-button" data-open-ticket-modal>
             + New Ticket
         </button>
-    </div>
+    </div> 
 
     <!-- Tableau -->
     <div class="cadre">
@@ -33,7 +36,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody data-ticket-list>
                 @foreach($tickets as $ticket)
                 <tr onclick="window.location.href='{{ route('tickets.Ticket', $ticket->id) }}'" style="cursor:pointer;">
                     <td>{{ $ticket->title }}</td>
@@ -62,16 +65,13 @@
 
         <h3>Créer un ticket</h3>
 
-        <form id="submitform_ticket" method="POST" action="{{ route('tickets.Store', ['id' => $id]) }}">
+        <form id="submitform_ticket">
             @csrf
 
             <label>Ticket Title:</label>
             <input type="text" id="ticket-title" name="ticket-title">
             <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
 
-            <label>Client:</label>
-            <input type="text" id="ticket-client" name="ticket-client">
-            <div id="client_error" class="error-text titanic">Le client est obligatoire.</div>
 
             <label>Description:</label>
             <textarea id="description" name="description"></textarea>
@@ -98,6 +98,8 @@
 </section>
 
 
-<script src="{{ asset('js/ticket-Forms.js') }}"></script>
+{{-- <script src="{{ asset('js/ticket-Forms.js') }}"></script> --}}
+<script src="{{ asset('js/tickets-modal.js') }}"></script>
+{{-- <script src="{{ asset('js/tickets-modalEdit.js') }}"></script> --}}
 
 @endsection

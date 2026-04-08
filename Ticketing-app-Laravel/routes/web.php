@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/Client-List', [ClientController::class, 'ClientList'])->name('clients.ClientList');
 
 
+    Route::post('/tickets', [TicketController::class, 'storeApi'])->name('api.tickets.storeApi');
+
+
     Route::get('/Ticket-List', [TicketController::class, 'TicketList'])->name('tickets.TicketList');
     Route::get('/Ticket/{id}', [TicketController::class, 'Ticket'])->name('tickets.Ticket');
     Route::get('/Ticket-Form/{id}', [TicketController::class, 'TicketForm'])->name('tickets.TicketForm');

@@ -115,13 +115,12 @@ class TicketController extends Controller
         return redirect()->route('tickets.TicketList', ['id' => $id, 'done' => $done]);
     }
 
-    public function storeApi(Request $request)
+    /* public function storeApi(Request $request)
     {
         $user = auth()->user();
 
         $validated = $request->validate([
             'ticket-title' => ['required', 'string', 'max:255'],
-            'ticket-client' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'project' => ['nullable', 'string'],
             'facturable' => ['nullable'],
@@ -139,10 +138,17 @@ class TicketController extends Controller
             }
         }
 
+        if($project){
+            $client_name = $project->client;
+        }
+        else{
+             $client_name = "No client";
+        }
+
         $ticket = Ticket::create([
             'user_id' => $user->id,
             'title' => $validated['ticket-title'],
-            'client' => $validated['ticket-client'],
+            'client' => $client_name,
             'description' => $validated['description'] ?? "",
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
@@ -164,6 +170,62 @@ class TicketController extends Controller
                 'user_id' => $ticket->user_id,
                 'user_name' => $user->name,
             ],
+        ], 201);
+    } */
+
+        public function storeApi(Request $request)
+    {
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'ticket-title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'project' => ['nullable', 'string'],
+            'facturable' => ['nullable'],
+        ]);
+
+        $project = null;
+        $project_id = null;
+
+        if ($validated['project'] !== 'No-Project') {
+            $project = Project::where('title', $validated['project'])->first();
+            $project_id = $project ? $project->id : null;
+
+            if ($project) {
+                $project->workingTickets++;
+                $project->ticketNumber = Ticket::where('project_id', $project->id)->count();
+                $project->save();
+            }
+        }
+
+        $client_name = $project ? $project->client : "No client";
+
+        $ticket = Ticket::create([
+            'user_id' => $user->id,
+            'title' => $validated['ticket-title'],
+            'client' => $client_name,
+            'description' => $validated['description'] ?? "",
+            'project' => $validated['project'] ?? "No project",
+            'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
+            'project_id' => $project_id,
+            'statut' => "⌛",
+        ]);
+        return response()->json([
+            'message' => 'Ticket ajouté avec succès.',
+            'ticket' => [
+                'id' => $ticket->id,
+                'title' => $ticket->title,
+                'client' => $ticket->client,
+                'description' => $ticket->description,
+                'project' => $ticket->project,
+                'project_id' => $ticket->project_id,
+                'facturable' => $ticket->facturable,
+                'statut' => $ticket->statut,
+                'user_id' => $ticket->user_id,
+                'user_name' => $user->name,
+                'created_at' => $ticket->created_at->format('Y-m-d H:i:s'),
+                 'show_url' => route('tickets.Ticket', $ticket->id),
+                ],
         ], 201);
     }
 
@@ -196,7 +258,7 @@ class TicketController extends Controller
         }
 
         $project_id = Project::where('title',$validated['project'])->first();
-        $project_id = $project_id->id ?? -1;
+        $project_id = $project_id->id ?? null;
 
         $ticket->update([
             'title' => $validated['ticket-title'],
@@ -204,7 +266,7 @@ class TicketController extends Controller
             'description' => $validated['description'] ?? $ticket->description, 
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
-            'project_id' => $project_id ?? -1,
+            'project_id' => $project_id ?? null,
             'statut' => $ticket->statut,
         ]);
 
@@ -341,7 +403,6 @@ class TicketController extends Controller
 
         $validated = $request->validate([
             'ticket-title' => ['required', 'string', 'max:255'],
-            'ticket-client' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'project' => ['nullable', 'string'],
             'facturable' => ['nullable'],
@@ -363,16 +424,17 @@ class TicketController extends Controller
         }
 
         // Récupérer le nouveau projet
-        $new_project_id = -1;
+        $new_project_id = null;
         if ($validated['project'] !== 'No-Project') {
             $new_project = Project::where('title', $validated['project'])->first();
-            $new_project_id = $new_project ? $new_project->id : -1;
+            $new_project_id = $new_project ? $new_project->id : null;
         }
 
+        $client_name = $new_project ? $new_project->client : "No client";
         // Mettre à jour le ticket
         $ticket->update([
             'title' => $validated['ticket-title'],
-            'client' => $validated['ticket-client'],
+            'client' => $client_name,
             'description' => $validated['description'] ?? $ticket->description, 
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',

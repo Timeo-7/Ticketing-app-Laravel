@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->Integer('project_id')->constrained('projects')->cascadeOnDelete();;
+            $table->foreignId('project_id')->nullable()->constrained('projects')->cascadeOnDelete(); // <-- nullable
             $table->string('title');
             $table->string('client');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('project');
             $table->string('statut');
             $table->string('facturable');

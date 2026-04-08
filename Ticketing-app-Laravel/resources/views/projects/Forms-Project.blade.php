@@ -20,8 +20,12 @@
                 <input type="text" id="project-title" name="project-title">
                 <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
                 <br>
-                <label for="project-client">Client Name:</label>
-                <input type="text" id="project-client" name="project-client">
+                <label for="client_id">Client:</label>
+                <select id="client_id" name="client_id">
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}">{{ $client->name }}</option>
+                        @endforeach
+                </select>
                 <div id="client_error" class="error-text titanic">Le client est obligatoire.</div>
                 <br>
                 <label for="description">Description:</label>

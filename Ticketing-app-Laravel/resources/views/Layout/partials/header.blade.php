@@ -1,12 +1,13 @@
 <header>
         <div class="logo">
             <a href="{{ route('dashboard') }}">
-                <img src="{{asset('asset/img/Logo.png')}}" alt="Logo de moi hyper bg">
+                <img src="{{asset('asset/img/Logo.png')}}" alt="Logo">
             </a>
         </div>
         <h2>Welcome {{auth()->user()->name}}</h2>
         <nav>
             <a href="{{ route('dashboard') }}">Dashboard</a>
+            <a href="{{ route('clients.ClientList') }}">Clients</a>
             <a href="{{ route('projects.ProjectList') }}">Projects</a>
             <a href="{{ route('tickets.TicketList') }}">Tickets</a>
             

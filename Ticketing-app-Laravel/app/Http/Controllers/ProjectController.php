@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Client;
 use App\Models\Ticket;
 
 class ProjectController extends Controller
@@ -39,8 +40,11 @@ class ProjectController extends Controller
     {
         $id = auth()->user()->id;
 
+        $clients = Client::where("user_id", $id)->get();
+
         return view('projects.Forms-Project', [
-            "id" => $id
+            "clients" => $clients,
+            "id" => $id,
             ]);
     }
 
@@ -51,7 +55,7 @@ class ProjectController extends Controller
         $done = false;
         $validated = $request->validate([
             'project-title' => ['required', 'string', 'max:255'],
-            'project-client' => ['required', 'string', 'max:255'],
+            'client_id' => ['required', 'int', 'max:255'],
             'description' => ['nullable', 'string'],
             'project-file' => ['nullable', 'string'],
         ]);
@@ -59,12 +63,15 @@ class ProjectController extends Controller
             return redirect()->route('projects.project-List');
         }
 
+        $client = Client::find($validated['client_id']);
+        $client_name = $client->name;
        
 
         Project::create([
             'user_id' => $id,
             'title' => $validated['project-title'],
-            'client' => $validated['project-client'],
+            'client_id' => $validated['client_id'],
+            'client' => $client->name,
             'description' => $validated['description'] ?? "",
             'contract' => "No file",
             'ticketNumber' => 0,

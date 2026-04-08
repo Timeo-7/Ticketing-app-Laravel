@@ -9,6 +9,7 @@ class Project extends Model
     protected $table = "projects";
     protected $fillable = [
         "title",
+        "client_id",
         "client",
         "description",
         "ticketNumber",

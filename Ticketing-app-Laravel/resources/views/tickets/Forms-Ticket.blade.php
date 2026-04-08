@@ -81,10 +81,6 @@
                     <input type="text" id="ticket-title" name="ticket-title">
                     <div id="title_error" class="error-text titanic">Le titre est obligatoire.</div>
 
-                    <label>Client:</label>
-                    <input type="text" id="ticket-client" name="ticket-client">
-                    <div id="client_error" class="error-text titanic">Le client est obligatoire.</div>
-
                     <label>Description:</label>
                     <textarea id="description" name="description"></textarea>
 

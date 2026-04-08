@@ -16,6 +16,7 @@ class ProjectSeeder extends Seeder
             [
                 'title' => 'Plateforme e-commerce',
                 'client' => 'Client A',
+                'client_id' => 2,
                 'description' => 'Développement d’une plateforme de vente en ligne.',
                 'ticketNumber' => 0,
                 'workingTickets' => 0,
@@ -26,6 +27,7 @@ class ProjectSeeder extends Seeder
             [
                 'title' => 'Application mobile bancaire',
                 'client' => 'Client B',
+                'client_id' => 1,
                 'description' => 'Maintenance et amélioration de l’application bancaire.',
                 'ticketNumber' => 0,
                 'workingTickets' => 0,
@@ -36,6 +38,7 @@ class ProjectSeeder extends Seeder
             [
                 'title' => 'Site vitrine entreprise',
                 'client' => 'Client C',
+                'client_id' => 0,
                 'description' => 'Création d’un site vitrine pour une PME.',
                 'ticketNumber' => 0,
                 'workingTickets' => 0,
@@ -46,6 +49,7 @@ class ProjectSeeder extends Seeder
             [
                 'title' => 'Outil interne de gestion',
                 'client' => 'Client D',
+                'client_id' => 0,
                 'description' => 'Développement d’un outil interne pour la gestion des stocks.',
                 'ticketNumber' => 0,
                 'workingTickets' => 0,
@@ -56,6 +60,7 @@ class ProjectSeeder extends Seeder
             [
                 'title' => 'Refonte site web',
                 'client' => 'Client E',
+                'client_id' => 1,
                 'description' => 'Refonte complète du site web existant.',
                 'ticketNumber' => 0,
                 'workingTickets' => 0,
