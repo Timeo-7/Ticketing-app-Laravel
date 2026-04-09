@@ -22,6 +22,9 @@ class TicketSeeder extends Seeder
                 'project' => 'Plateforme e-commerce',
                 'statut' => "⌛",
                 'facturable' => '🪙',
+                'time_estimated' => 5,
+                'time_spent' => 2,
+                'hourly_rate' => 50,
             ],
             [
                 'user_id' => 2,
@@ -32,6 +35,9 @@ class TicketSeeder extends Seeder
                 'project' => 'Plateforme e-commerce',
                 'statut' => "✅",
                 'facturable' => '_',
+                'time_estimated' => 3,
+                'time_spent' => 3,
+                'hourly_rate' => 60,
             ],
             [
                 'user_id' => 3,
@@ -42,6 +48,9 @@ class TicketSeeder extends Seeder
                 'project' => 'Plateforme e-commerce',
                 'statut' => "⌛",
                 'facturable' => '🪙',
+                'time_estimated' => 4,
+                'time_spent' => 1.5,
+                'hourly_rate' => 55,
             ],
             [
                 'user_id' => 4,
@@ -52,6 +61,9 @@ class TicketSeeder extends Seeder
                 'project' => 'Plateforme e-commerce',
                 'statut' => "⌛",
                 'facturable' => '_',
+                'time_estimated' => 6,
+                'time_spent' => 0,
+                'hourly_rate' => 50,
             ],
             [
                 'user_id' => 5,
@@ -61,8 +73,10 @@ class TicketSeeder extends Seeder
                 'description' => 'L’utilisateur ne reçoit pas l’email de réinitialisation.',
                 'project' => 'Plateforme e-commerce',
                 'statut' => "✅",
-                
                 'facturable' => '🪙',
+                'time_estimated' => 2,
+                'time_spent' => 2,
+                'hourly_rate' => 45,
             ],
         ];
 

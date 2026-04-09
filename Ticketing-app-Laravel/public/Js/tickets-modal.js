@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${ticket.client}</td>
             <td>${ticket.statut}</td>
             <td>${ticket.facturable}</td>
+            <td>${ticket.time_estimated}h</td>
+            <td>${ticket.time_spent}h</td>
+            <td>${ticket.time_remaining}h</td>
+            <td>${ticket.billable_amount}€</td>
             <td>${ticket.created_at}</td>
         `;
 
@@ -56,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 'ticket-title': apiForm.querySelector("input[name='ticket-title']").value,
                 'description': apiForm.querySelector("textarea[name='description']").value || "",
                 'project': apiForm.querySelector("select[name='project']").value || "No project",
-                'facturable': apiForm.querySelector("input[name='facturable']").checked ? '🪙' : '_'
+                'facturable': apiForm.querySelector("input[name='facturable']").checked ? '🪙' : '_',
+                'time_estimated': parseFloat(apiForm.querySelector("input[name='time_estimated']").value) || 0
             };
 
             const response = await fetch("/tickets", {

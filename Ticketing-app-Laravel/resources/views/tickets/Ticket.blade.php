@@ -25,14 +25,12 @@
                 @else
                     <button type="submit">✅ Validate Ticket</button>
                 @endif
-                
             </form>
 
             <!-- Bouton Delete -->
             <form class="Supression-button" action="{{ route('tickets.Delete', ['id' => $ticket->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-
                 <button type="submit">Supprimer le ticket</button>
             </form>
         </div>
@@ -47,7 +45,7 @@
 
         <table class="Table-ticket">
             <tr>
-                <th colspan="2">Ticket Statut</th>
+                <th colspan="2">Ticket Statut et Temps</th>
             </tr>
             <tr>
                 <td>Statut:</td> 
@@ -58,12 +56,32 @@
                 <td>{{ $ticket->created_at }}</td>
             </tr>
             <tr>
-                <td>Date de dernière mise à jour: </td>
+                <td>Date de dernière mise à jour:</td>
                 <td>{{ $ticket->updated_at }}</td>
             </tr>
             <tr>
                 <td>Facturable:</td>
                 <td id="ticket-facturable-display">{{ $ticket->facturable }}</td>
+            </tr>
+            <tr>
+                <td>Temps estimé :</td>
+                <td>{{ $ticket->time_estimated ?? 0 }} h</td>
+            </tr>
+            <tr>
+                <td>Temps passé :</td>
+                <td>{{ $ticket->time_spent ?? 0 }} h</td>
+            </tr>
+            <tr>
+                <td>Temps restant :</td>
+                <td>{{ $ticket->time_remaining ?? 0 }} h</td>
+            </tr>
+            <tr>
+                <td>Tarif horaire :</td>
+                <td>{{ $ticket->hourly_rate ?? 0 }} €</td>
+            </tr>
+            <tr>
+                <td>Montant facturable :</td>
+                <td>{{ $ticket->billable_amount ?? 0 }} €</td>
             </tr>
         </table>
 
@@ -104,10 +122,11 @@
             @endforeach
         </select>
 
-        <label>
-            Facturable
-            <input type="checkbox" id="facturable" name="facturable" value="1" {{ $ticket->facturable === '🪙' ? 'checked' : '' }}>
-        </label>
+        <label>Facturable</label>
+        <input type="checkbox" id="facturable" name="facturable" value="1" {{ $ticket->facturable === '🪙' ? 'checked' : '' }}>
+
+        <label>Temps estimé (h):</label>
+        <input type="number" step="0.5" name="time_estimated" value="{{ $ticket->time_estimated ?? 0 }}">
 
         <button type="submit" class="Submit-button" data-ticket-submit-button>Mettre à jour</button>
     </form>

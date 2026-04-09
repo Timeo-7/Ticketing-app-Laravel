@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\Client;
 use App\Models\Project;
 
 class DashboardController extends Controller
@@ -13,10 +14,12 @@ class DashboardController extends Controller
         $id = $id = auth()->user()->id;
         $tickets = Ticket::where('user_id',$id)->get();
         $projects = Project::where('user_id',$id)->get();
+        $clients = Client::where('user_id',$id)->get();
 
         return view('dashboard.Dashboard', [
             "tickets" => $tickets,
             "projects" => $projects,
+            "clients" => $clients,
             "id" => $id,
         ]);
     }

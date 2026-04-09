@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${ticket.statut}</td>
                 <td>${ticket.facturable}</td>
                 <td>${ticket.created_at}</td>
+                
             `;
             return;
         }
@@ -85,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'ticket-title': apiForm.querySelector("input[name='ticket-title']").value,
                 'description': apiForm.querySelector("textarea[name='description']").value || "",
                 'project': apiForm.querySelector("select[name='project']").value || "No project",
-                'facturable': apiForm.querySelector("input[name='facturable']").checked ? '🪙' : '_'
+                'facturable': apiForm.querySelector("input[name='facturable']").checked ? '🪙' : '_',
+                'time_estimated': parseFloat(apiForm.querySelector("input[name='time_estimated']").value) || 0
             };
             
             

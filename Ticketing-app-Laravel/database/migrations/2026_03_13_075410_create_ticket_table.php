@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('statut');
             $table->string('facturable');
             $table->timestamps();
+            $table->float('time_estimated')->default(0);
+            $table->float('time_spent')->default(0);
+            $table->float('hourly_rate')->default(0);
         });
     }
 

@@ -115,64 +115,6 @@ class TicketController extends Controller
         return redirect()->route('tickets.TicketList', ['id' => $id, 'done' => $done]);
     }
 
-    /* public function storeApi(Request $request)
-    {
-        $user = auth()->user();
-
-        $validated = $request->validate([
-            'ticket-title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'project' => ['nullable', 'string'],
-            'facturable' => ['nullable'],
-        ]);
-
-        $project_id = -1;
-        if ($validated['project'] !== 'No-Project') {
-            $project = Project::where('title', $validated['project'])->first();
-            $project_id = $project ? $project->id : -1;
-
-            if ($project) {
-                $project->workingTickets++;
-                $project->ticketNumber = Ticket::where('project_id', $project->id)->count();
-                $project->save();
-            }
-        }
-
-        if($project){
-            $client_name = $project->client;
-        }
-        else{
-             $client_name = "No client";
-        }
-
-        $ticket = Ticket::create([
-            'user_id' => $user->id,
-            'title' => $validated['ticket-title'],
-            'client' => $client_name,
-            'description' => $validated['description'] ?? "",
-            'project' => $validated['project'] ?? "No project",
-            'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
-            'project_id' => $project_id,
-            'statut' => "⌛",
-        ]);
-
-        return response()->json([
-            'message' => 'Ticket ajouté avec succès.',
-            'ticket' => [
-                'id' => $ticket->id,
-                'title' => $ticket->title,
-                'client' => $ticket->client,
-                'description' => $ticket->description,
-                'project' => $ticket->project,
-                'project_id' => $ticket->project_id,
-                'facturable' => $ticket->facturable,
-                'statut' => $ticket->statut,
-                'user_id' => $ticket->user_id,
-                'user_name' => $user->name,
-            ],
-        ], 201);
-    } */
-
         public function storeApi(Request $request)
     {
         $user = auth()->user();
@@ -182,6 +124,7 @@ class TicketController extends Controller
             'description' => ['nullable', 'string'],
             'project' => ['nullable', 'string'],
             'facturable' => ['nullable'],
+            'time_estimated' => ['nullable', 'numeric', 'min:0'],
         ]);
 
         $project = null;
@@ -208,8 +151,10 @@ class TicketController extends Controller
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
             'project_id' => $project_id,
+            'time_estimated' => $validated['time_estimated'],
             'statut' => "⌛",
         ]);
+        
         return response()->json([
             'message' => 'Ticket ajouté avec succès.',
             'ticket' => [
@@ -223,9 +168,14 @@ class TicketController extends Controller
                 'statut' => $ticket->statut,
                 'user_id' => $ticket->user_id,
                 'user_name' => $user->name,
+                'time_estimated' => $ticket->time_estimated,
+                'time_spent' => $ticket->time_spent ?? 0,
+                'time_remaining' => $ticket->time_remaining ?? 0,
+                'billable_amount' => $ticket->billable_amount ?? 0,
                 'created_at' => $ticket->created_at->format('Y-m-d H:i:s'),
                  'show_url' => route('tickets.Ticket', $ticket->id),
                 ],
+                
         ], 201);
     }
 
@@ -423,6 +373,7 @@ class TicketController extends Controller
             'description' => ['nullable', 'string'],
             'project' => ['nullable', 'string'],
             'facturable' => ['nullable'],
+            'time_estimated' => ['nullable', 'numeric', 'min:0'],
         ]);
 
         // Gestion du projet précédent
@@ -455,6 +406,7 @@ class TicketController extends Controller
             'description' => $validated['description'] ?? $ticket->description, 
             'project' => $validated['project'] ?? "No project",
             'facturable' => !empty($validated['facturable']) ? '🪙' : '_',
+            'time_estimated' => $validated['time_estimated'],
             'project_id' => $new_project_id,
         ]);
 
@@ -494,6 +446,7 @@ class TicketController extends Controller
                 'project_id' => $ticket->project_id,
                 'facturable' => $ticket->facturable,
                 'statut' => $ticket->statut,
+                'time_estimated' => $ticket->time_estimated,
                 'user_id' => $ticket->user_id,
             ],
         ], 200);

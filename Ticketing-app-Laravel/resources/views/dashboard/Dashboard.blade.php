@@ -8,7 +8,7 @@
             <div class="stats-list">
 
                 <div class="stats-list-clients">
-                    <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: ??</a>
+                    <a class="cadre" href="{{ route('clients.ClientList') }}">Clients: {{$clients->count()}}</a>
                     <a class="cadre" href="{{ route('projects.ProjectList', $id) }}">Projects: {{$projects->count()}}</a>
                     <a class="cadre" href="{{ route('tickets.TicketList', $id) }}">Tickets: {{$tickets->count()}}</a>
                 </div>

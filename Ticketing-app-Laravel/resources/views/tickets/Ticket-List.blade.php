@@ -32,7 +32,11 @@
                     <td>Client</td>
                     <td>Statut</td>
                     <td>Paiement</td>
-                    <td>Date</td>
+                    <td>Temps estimé</td>
+                    <td>Temps passé</td>
+                    <td>Temps restant</td>
+                    <td>À facturer</td>
+                    <td>Création</td>
                 </tr>
             </thead>
 
@@ -43,6 +47,10 @@
                     <td>{{ $ticket->client }}</td>
                     <td>{{ $ticket->statut }}</td>
                     <td>{{ $ticket->facturable }}</td>
+                    <td>{{ $ticket->time_estimated }} h</td>
+                    <td>{{ $ticket->time_spent }} h</td>
+                    <td>{{ $ticket->time_remaining }} h</td>
+                    <td>{{ $ticket->billable_amount }} €</td>
                     <td>{{ $ticket->created_at }}</td>
                 </tr>
                 @endforeach
@@ -88,6 +96,10 @@
                 Facturable
                 <input type="checkbox" id="facturable" name="facturable">
             </label>
+
+            
+            <label>Temps estimé (heures):</label>
+            <input type="number" step="0.5" name="time_estimated" value="{{ $ticket->time_estimated }}">
 
             <button type="submit">Créer</button>
 
