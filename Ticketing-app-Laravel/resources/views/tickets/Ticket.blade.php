@@ -16,19 +16,25 @@
             <!-- Bouton ouverture modal update -->
             <button class="Edit-button" data-open-ticket-modal-update data-ticket-id="{{$ticket->id}}">✏️ Edit Ticket</button>
 
-            <!-- Bouton Validate -->
-            <button class="Validate-button" data-validate-ticket="{{ $ticket->id }}">
+            <form class="Validate-button" action="{{ route('tickets.Validate', ['id' => $ticket->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+
                 @if($ticket->statut == "✅")
-                    ⌛ Working Ticket
+                    <button type="submit">⌛ Working Ticket</button>
                 @else
-                    ✅ Validate Ticket
+                    <button type="submit">✅ Validate Ticket</button>
                 @endif
-            </button>
+                
+            </form>
 
             <!-- Bouton Delete -->
-            <button class="Supression-button" action="{{route("tickets.Delete")}}">
-                Supprimer le ticket
-            </button>
+            <form class="Supression-button" action="{{ route('tickets.Delete', ['id' => $ticket->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit">Supprimer le ticket</button>
+            </form>
         </div>
     </div>
 

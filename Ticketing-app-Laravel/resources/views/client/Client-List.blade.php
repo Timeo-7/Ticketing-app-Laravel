@@ -5,13 +5,6 @@
 
 <section class="Tickets-List" data-ticket-page>
 
-    <!-- Bouton ouverture modal -->
-    <div>
-        <button class="new-ticket-button" data-open-ticket-modal>
-            + New Ticket
-        </button>
-    </div>
-
     <!-- Tableau -->
     <div class="cadre">
         

@@ -4,12 +4,10 @@
 
 <section class="Profile">
         <div class="Profil-Picture">
-            <img id="Profil-image" src="{{ asset('asset/img/Profile.png') }}" alt="Logo de moi hyper bg" >
-            <div><h2 id="Profil Name">Maxence Gautier-Grall</h2></div>
+            <img id="Profil-image" src="{{ asset('asset/img/Profile.png') }}" alt="Logo" >
+            <div><h2 id="Profil Name">{{$User->name}}</h2></div>
             <div id="Profil-Informations">
-                <p>Email : XXXXXXX@XXXXXXX</p>
-                <p>Number : +33 (0)7 95 86 42 48</p>
-                <p>Account type : Client</p>
+                <p>Email : {{$User->email}}</p>
             </div>
         </div>
         <div id="Profile-Access">
@@ -21,46 +19,47 @@
 
                     <div>
                         <div class="access-list">
+                             <div class="access-list">
                             <div class="cadre">   
-                                <a href="{{ route('projects.ProjectList') }}">Projects</a>
+                                <a  href="{{ route('projects.ProjectList') }}">Projects</a>
+                                    @foreach ($projects as $project)
 
-                                <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                                    <p>Project 1</p>
-                                    <p>25x🧾</p>
-                                </a>
-                                <a class="projects-fast-access" href="{{ route('projects.Project') }}" >
-                                    <p>Project 2</p>
-                                    <p>36x🧾</p>
-                                </a>
+                                    <a class="projects-fast-access" href="{{ route('projects.Project', ['id' => $project->id]) }}" >
+                                        <p>{{$project->title}}</p>
+                                        <p>{{$project->ticketNumber}}x🧾</p>
+                                    </a>
+                                    
+
+                                    @endforeach
 
                             </div>
                             
                             <div class="cadre">   
                                 <a href="{{ route('tickets.TicketList') }}">Tickets</a>
 
-                                <a class="tickets-fast-access" href="{{ route('tickets.Ticket') }}" >
-                                    <p>Tickets 1</p>
-                                    <p>client 1</p>
-                                    
-                                    <ul>
-                                        <li>2x🚹</li>
-                                        <li>⏳</li>
-                                        <li>🪙</li>
-                                        <li>28/01/2026 12:06</li>
-                                    </ul>
-                                </a>
+                                    <table class="Table-ticket">
+                                        <thead>
+                                            <tr>
+                                                <td>Ticket</td>
+                                                <td>Client</td>
+                                                <td>Statut</td>
+                                                <td>Paiement</td>
+                                                <td>Date</td>
+                                            </tr>
+                                        </thead>
 
-                                <a class="tickets-fast-access" href="{{ route('tickets.Ticket') }}" >
-                                    <p>Tickets 2</p>
-                                    <p>client 2</p>
-                                    
-                                    <ul>
-                                        <li>0x🚹</li>
-                                        <li>❌</li>
-                                        <li>27/01/2026 14:29</li>
-                                    </ul>
-                                </a>
-
+                                        <tbody data-ticket-list>
+                                            @foreach($tickets as $ticket)
+                                            <tr onclick="window.location.href='{{ route('tickets.Ticket', $ticket->id) }}'" style="cursor:pointer;">
+                                                <td>{{ $ticket->title }}</td>
+                                                <td>{{ $ticket->client }}</td>
+                                                <td>{{ $ticket->statut }}</td>
+                                                <td>{{ $ticket->facturable }}</td>
+                                                <td>{{ $ticket->created_at }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                              </div>
                             
                     </div>

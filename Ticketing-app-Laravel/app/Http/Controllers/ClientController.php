@@ -16,7 +16,7 @@ class ClientController extends Controller
 
         $clients = Client::where("user_id", $id)->get();
 
-        return view('clients.Client-List', [
+        return view('client.Client-List', [
             "clients" => $clients,
             "id" => $id,
         ]);

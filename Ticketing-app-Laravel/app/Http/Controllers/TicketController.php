@@ -360,6 +360,8 @@ class TicketController extends Controller
             'id' => ['required', 'integer', 'exists:Ticket,id'],
         ]);
 
+        
+
         $ticket = Ticket::findOrFail($validated['id']);
 
             $project = Project::find($ticket->project_id);
@@ -378,13 +380,28 @@ class TicketController extends Controller
 
         $user_id = $ticket->user_id;
         $project_id = $ticket->project_id;
+        $Prev_project = Project::find($project_id);
 
         $ticket->delete();
 
 
-        $totalCount = Ticket::where('project_id', $project->id)->count();
-        $Prev_project->ticketNumber = $totalCount;
-
+        
+        if($Prev_project){
+            $totalCount = Ticket::where('project_id', $project->id)->count();
+            $Prev_project->ticketNumber = $totalCount;
+            
+            $query = Ticket::where('user_id', auth()->user()->id);
+            if($ticket->statut == "⌛"){
+                $workingCount = $query->where('statut', "⌛")->count();
+                $Prev_project->workingTickets = $workingCount;
+            }
+            else{
+                $completeCount = $query->where('statut', "✅")->count();
+                $Prev_project->completeTickets = $completeCount;
+            }
+            $Prev_project->save();
+        }
+       
         return redirect()->route('tickets.TicketList', $user_id);
     }
 

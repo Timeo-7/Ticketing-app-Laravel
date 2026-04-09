@@ -15,7 +15,7 @@
 
                     <a class="projects-fast-access" href="{{ route('projects.Project', ['id' => $project->id]) }}" >
                          <p>{{$project->title}}</p>
-                         <p>{{$project->workingTickets}}x🧾</p>
+                         <p>{{$project->ticketNumber}}x🧾</p>
                     </a>
                     
 
