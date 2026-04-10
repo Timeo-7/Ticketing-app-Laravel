@@ -60,7 +60,7 @@ class ProjectController extends Controller
             'project-file' => ['nullable', 'string'],
         ]);
         if(!$validated){
-            return redirect()->route('projects.project-List');
+            return redirect()->route('projects.Project-List');
         }
 
         $client = Client::find($validated['client_id']);
