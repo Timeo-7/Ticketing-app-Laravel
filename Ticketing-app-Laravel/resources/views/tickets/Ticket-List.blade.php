@@ -99,7 +99,7 @@
 
             
             <label>Temps estimé (heures):</label>
-            <input type="number" step="0.5" name="time_estimated" value="{{ $ticket->time_estimated }}">
+            <input type="number" step="0.5" name="time_estimated">
 
             <button type="submit">Créer</button>
 
