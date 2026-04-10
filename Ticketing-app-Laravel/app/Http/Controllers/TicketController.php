@@ -154,6 +154,24 @@ class TicketController extends Controller
             'time_estimated' => $validated['time_estimated'],
             'statut' => "⌛",
         ]);
+
+        $project = Project::find($project_id);
+        if ($project) {
+            $query = Ticket::where('user_id', auth()->user()->id);
+            if($ticket->statut == "⌛"){
+                $workingCount = $query->where('statut', "⌛")->count();
+                $project->workingTickets = $workingCount;
+            }
+            else{
+                $completeCount = $query->where('statut', "✅")->count();
+                $project->completeTickets =  $completeCount;
+            }
+
+            $totalCount = Ticket::where('project_id', $project->id)->count();
+            $project->ticketNumber = $totalCount;
+
+            $project->save();
+        }
         
         return response()->json([
             'message' => 'Ticket ajouté avec succès.',

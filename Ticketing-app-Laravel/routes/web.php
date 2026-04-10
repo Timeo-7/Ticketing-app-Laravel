@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/Client-List', [ClientController::class, 'ClientList'])->name('clients.ClientList');
 
-
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::post('/tickets', [TicketController::class, 'storeApi'])->name('api.tickets.storeApi');
 
 

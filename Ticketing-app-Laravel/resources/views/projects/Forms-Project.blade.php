@@ -31,8 +31,6 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"></textarea>
                 <br>
-                <label for="project-file">Contract : <input type="text" id="project-file" name="mon_fichier"  {{-- accept=".pdf,.doc,.docx" --}}></label>
-                <div id="file_error" class="error-text titanic">Le contrat est obligatoire.</div>
                 
                     
                 <button type="submit" class="Submit-button">Create Project</button>

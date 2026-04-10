@@ -21,4 +21,20 @@ class ClientController extends Controller
             "id" => $id,
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $id = auth()->user()->id;
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Client::create([
+            'name' => $request->name,
+            'user_id' => $id,
+        ]);
+
+        return redirect()->back()->with('success', 'Client créé avec succès');
+    }
 }

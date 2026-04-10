@@ -33,10 +33,6 @@
                     <th colspan="2">Project Details</th>
                 </tr>
                 <tr>
-                    <td>Contract : </td>
-                    <td><button class="Edit-button">Download Contract</button></td>
-                </tr>
-                <tr>
                     <td>Number of associated tickets: </td>
                     <td>{{$project->ticketNumber}}🧾</td>
                 </tr>

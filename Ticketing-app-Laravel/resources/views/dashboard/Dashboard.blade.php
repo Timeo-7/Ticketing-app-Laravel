@@ -15,12 +15,12 @@
 
                 <div class="stats-list-tickets">
                     <div class="stats-list-tickets1">
-                        <div class="cadre">🧾Tickets ouverts: {{$tickets->count()}}</div>
+                        <div class="cadre">🧾Tickets: {{$tickets->count()}}</div>
                         <div class="cadre">⏳Tickets en cours: {{$tickets->where("statut","⌛")->count()}}</div>
                     </div>
                     <div class="stats-list-tickets2">
                         <div class="cadre">✅Tickets terminés: {{$tickets->where("statut","✅")->count()}}</div>
-                        <div class="cadre">💰Tickets facturables en attente: {{$tickets->where("facturable","🪙")->count()}}</div>
+                        <div class="cadre">💰Tickets facturables: {{$tickets->where("facturable","🪙")->count()}}</div>
                     </div>
                 </div>
                 

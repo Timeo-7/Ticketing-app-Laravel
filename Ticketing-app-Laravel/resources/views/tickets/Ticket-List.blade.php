@@ -20,9 +20,9 @@
         <p>Tickets</p>
 
         <div class="filters">
-            <a href="?filter=Working">En cours</a>
-            <a href="?filter=Finish">Traité</a>
-            <a href="?filter=Facturable">Facturable</a>
+            <a href="?filter=Working" class="filter-btn-En-Cours">En cours</a>
+            <a href="?filter=Finish" class="filter-btn-Non-Traite">Traité</a>
+            <a href="?filter=Facturable" class="filter-btn-Money">Facturable</a>
         </div>
 
         <table class="Table-ticket">
@@ -59,7 +59,6 @@
 
     </div>
 
-    <!-- Message succès -->
     @if(isset($done))
         <div class="ValidForms titanic">
             <p>Formulaire envoyé</p>
@@ -110,8 +109,7 @@
 </section>
 
 
-{{-- <script src="{{ asset('js/ticket-Forms.js') }}"></script> --}}
 <script src="{{ asset('js/tickets-modal.js') }}"></script>
-{{-- <script src="{{ asset('js/tickets-modalEdit.js') }}"></script> --}}
+
 
 @endsection
